@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -8,106 +9,103 @@
 <title>Md. Minhazur Rahman Mahim</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    scroll-behavior:smooth;
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
 }
 
 :root{
 
-    --bg:#050816;
-    --card:rgba(255,255,255,.06);
-    --glass:rgba(255,255,255,.07);
+--bg:#050816;
+--card:rgba(255,255,255,.06);
+--glass:rgba(255,255,255,.08);
 
-    --text:#ffffff;
-    --muted:#a1a1aa;
+--text:#ffffff;
+--muted:#a1a1aa;
 
-    --border:rgba(255,255,255,.08);
+--border:rgba(255,255,255,.08);
 
-    --primary:#7c3aed;
-    --secondary:#06b6d4;
-    --third:#3b82f6;
+--primary:#7c3aed;
+--secondary:#06b6d4;
+--third:#3b82f6;
 
 }
 
 body.light{
 
-    --bg:#eef2ff;
-    --card:rgba(255,255,255,.72);
-    --glass:rgba(255,255,255,.72);
+--bg:#eef2ff;
+--card:rgba(255,255,255,.72);
+--glass:rgba(255,255,255,.72);
 
-    --text:#111827;
-    --muted:#475569;
+--text:#111827;
+--muted:#475569;
 
-    --border:rgba(0,0,0,.08);
+--border:rgba(0,0,0,.08);
 
 }
 
 body{
 
-    background:var(--bg);
-    color:var(--text);
+background:var(--bg);
+color:var(--text);
 
-    font-family:'Inter',sans-serif;
+font-family:'Inter',sans-serif;
 
-    overflow-x:hidden;
+overflow-x:hidden;
 
-    transition:.4s;
+transition:.4s;
 
 }
 
-/* BACKGROUND */
-
 body::before{
 
-    content:'';
+content:'';
 
-    position:fixed;
+position:fixed;
 
-    width:700px;
-    height:700px;
+width:700px;
+height:700px;
 
-    background:
-    radial-gradient(circle,var(--primary),transparent 70%);
+background:
+radial-gradient(circle,var(--primary),transparent 70%);
 
-    top:-250px;
-    left:-250px;
+top:-250px;
+left:-250px;
 
-    filter:blur(130px);
+filter:blur(130px);
 
-    opacity:.35;
+opacity:.35;
 
-    z-index:-1;
+z-index:-1;
 
 }
 
 body::after{
 
-    content:'';
+content:'';
 
-    position:fixed;
+position:fixed;
 
-    width:700px;
-    height:700px;
+width:700px;
+height:700px;
 
-    background:
-    radial-gradient(circle,var(--secondary),transparent 70%);
+background:
+radial-gradient(circle,var(--secondary),transparent 70%);
 
-    bottom:-250px;
-    right:-250px;
+bottom:-250px;
+right:-250px;
 
-    filter:blur(130px);
+filter:blur(130px);
 
-    opacity:.28;
+opacity:.28;
 
-    z-index:-1;
+z-index:-1;
 
 }
 
@@ -115,122 +113,206 @@ body::after{
 
 .page-intro{
 
-    position:fixed;
+position:fixed;
+inset:0;
 
-    inset:0;
+background:#050816;
 
-    background:#050816;
+display:flex;
+justify-content:center;
+align-items:center;
 
-    display:flex;
+z-index:999999;
 
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:999999;
-
-    animation:introHide 3s forwards;
+animation:introHide 3s forwards;
 
 }
 
 .page-intro img{
 
-    width:230px;
-    height:230px;
+width:230px;
+height:230px;
 
-    border-radius:50%;
+border-radius:50%;
 
-    object-fit:cover;
+object-fit:cover;
 
-    border:5px solid rgba(255,255,255,.15);
+border:5px solid rgba(255,255,255,.15);
 
-    box-shadow:
-    0 0 60px rgba(124,58,237,.55),
-    0 0 120px rgba(6,182,212,.35);
+box-shadow:
+0 0 60px rgba(124,58,237,.55),
+0 0 120px rgba(6,182,212,.35);
 
-    animation:introZoom 2.5s ease;
+animation:introZoom 2.5s ease;
 
 }
 
 @keyframes introZoom{
 
-    0%{
+0%{
+opacity:0;
+transform:scale(.3) rotate(-15deg);
+}
 
-        opacity:0;
+60%{
+opacity:1;
+transform:scale(1.1) rotate(0deg);
+}
 
-        transform:
-        scale(.3)
-        rotate(-15deg);
-
-    }
-
-    60%{
-
-        opacity:1;
-
-        transform:
-        scale(1.1)
-        rotate(0deg);
-
-    }
-
-    100%{
-
-        opacity:1;
-
-        transform:scale(1);
-
-    }
+100%{
+opacity:1;
+transform:scale(1);
+}
 
 }
 
 @keyframes introHide{
 
-    0%{
-        opacity:1;
-        visibility:visible;
-    }
+0%{
+opacity:1;
+visibility:visible;
+}
 
-    85%{
-        opacity:1;
-    }
+85%{
+opacity:1;
+}
 
-    100%{
-        opacity:0;
-        visibility:hidden;
-    }
+100%{
+opacity:0;
+visibility:hidden;
+}
 
 }
 
-/* MENU BUTTON */
+/* BUTTONS */
 
 .menu-btn{
 
-    position:fixed;
+position:fixed;
 
-    top:20px;
-    left:20px;
+top:20px;
+left:20px;
 
-    width:58px;
-    height:58px;
+width:58px;
+height:58px;
 
-    border:none;
+border:none;
 
-    border-radius:18px;
+border-radius:18px;
 
-    background:
-    linear-gradient(
-    135deg,
-    var(--primary),
-    var(--secondary));
+background:
+linear-gradient(
+135deg,
+var(--primary),
+var(--secondary));
 
-    color:white;
+color:white;
 
-    font-size:22px;
+font-size:22px;
 
-    cursor:pointer;
+cursor:pointer;
 
-    z-index:999999;
+z-index:999999;
+
+}
+
+.theme-switch{
+
+position:fixed;
+
+top:20px;
+right:20px;
+
+width:60px;
+height:60px;
+
+border:none;
+
+border-radius:18px;
+
+background:
+linear-gradient(
+135deg,
+#0f172a,
+#1e293b);
+
+color:white;
+
+font-size:22px;
+
+cursor:pointer;
+
+z-index:999999;
+
+transition:.35s;
+
+}
+
+.theme-switch:hover{
+
+transform:scale(1.08);
+
+}
+
+/* FLOATING PROFILE */
+
+.floating-profile{
+
+position:fixed;
+
+top:20px;
+right:95px;
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(18px);
+
+padding:10px 16px;
+
+border-radius:50px;
+
+border:1px solid rgba(255,255,255,.08);
+
+z-index:999999;
+
+transform:translateY(-120px);
+
+opacity:0;
+
+transition:.7s;
+
+}
+
+.floating-profile.show{
+
+transform:translateY(0);
+
+opacity:1;
+
+}
+
+.floating-profile img{
+
+width:48px;
+height:48px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+}
+
+.floating-profile h4{
+
+font-size:14px;
+
+line-height:1.4;
 
 }
 
@@ -238,162 +320,131 @@ body::after{
 
 .sidebar{
 
-    position:fixed;
+position:fixed;
 
-    top:20px;
-    left:-350px;
+top:20px;
+left:-350px;
 
-    width:320px;
-    height:calc(100vh - 40px);
+width:320px;
+height:calc(100vh - 40px);
 
-    background:var(--glass);
+background:var(--glass);
 
-    border:1px solid var(--border);
+border:1px solid var(--border);
 
-    backdrop-filter:blur(25px);
+backdrop-filter:blur(25px);
 
-    border-radius:35px;
+border-radius:35px;
 
-    padding:28px;
+padding:28px;
 
-    overflow:auto;
+overflow:auto;
 
-    z-index:99999;
+z-index:99999;
 
-    transition:.45s;
+transition:.45s;
 
 }
 
 .sidebar.show{
 
-    left:20px;
+left:20px;
 
 }
 
 .profile{
 
-    text-align:center;
+text-align:center;
 
-    margin-bottom:35px;
+margin-bottom:35px;
 
 }
 
 .profile img{
 
-    width:125px;
-    height:125px;
+width:125px;
+height:125px;
 
-    border-radius:50%;
+border-radius:50%;
 
-    object-fit:cover;
+object-fit:cover;
 
-    border:3px solid rgba(255,255,255,.15);
+border:3px solid rgba(255,255,255,.15);
 
 }
 
 .profile h2{
 
-    margin-top:18px;
+margin-top:18px;
 
-    font-size:26px;
+font-size:26px;
 
-    font-family:'Syne',sans-serif;
+font-family:'Syne',sans-serif;
 
 }
 
 .profile p{
 
-    margin-top:8px;
+margin-top:8px;
 
-    color:var(--muted);
+color:var(--muted);
 
 }
 
 .nav{
 
-    display:flex;
-
-    flex-direction:column;
-
-    gap:12px;
+display:flex;
+flex-direction:column;
+gap:12px;
 
 }
 
 .nav a{
 
-    text-decoration:none;
+text-decoration:none;
+color:var(--text);
 
-    color:var(--text);
+padding:15px 18px;
 
-    padding:15px 18px;
+border-radius:18px;
 
-    border-radius:18px;
-
-    transition:.3s;
+transition:.3s;
 
 }
 
 .nav a:hover{
 
-    background:rgba(255,255,255,.07);
+background:rgba(255,255,255,.07);
 
-    transform:translateX(6px);
+transform:translateX(6px);
 
 }
 
 .menu-title{
 
-    margin-top:20px;
+margin-top:20px;
 
-    margin-bottom:8px;
+margin-bottom:8px;
 
-    color:var(--muted);
+color:var(--muted);
 
-    font-size:13px;
+font-size:13px;
 
-    letter-spacing:2px;
+letter-spacing:2px;
 
-    text-transform:uppercase;
+text-transform:uppercase;
 
-    padding-left:10px;
+padding-left:10px;
 
 }
 
 .sub-menu{
 
-    display:flex;
+display:flex;
+flex-direction:column;
+gap:10px;
 
-    flex-direction:column;
-
-    gap:10px;
-
-    margin-left:15px;
-
-}
-
-.theme-btn{
-
-    margin-top:25px;
-
-    width:100%;
-
-    border:none;
-
-    padding:16px;
-
-    border-radius:18px;
-
-    background:
-    linear-gradient(
-    135deg,
-    var(--primary),
-    var(--third));
-
-    color:white;
-
-    font-weight:600;
-
-    cursor:pointer;
+margin-left:15px;
 
 }
 
@@ -401,45 +452,45 @@ body::after{
 
 .main{
 
-    width:100%;
-
-    padding:40px;
+padding:40px;
 
 }
 
-/* PAGES */
+/* PAGE */
 
 .page{
 
-    display:none;
+display:none;
 
-    animation:fade .5s ease;
+position:relative;
 
-    border-radius:40px;
+border-radius:40px;
 
-    padding:40px;
+padding:40px;
 
-    min-height:100vh;
+min-height:100vh;
+
+animation:fade .5s ease;
 
 }
 
 .page.active{
 
-    display:block;
+display:block;
 
 }
 
 @keyframes fade{
 
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
+from{
+opacity:0;
+transform:translateY(20px);
+}
 
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+to{
+opacity:1;
+transform:translateY(0);
+}
 
 }
 
@@ -447,78 +498,124 @@ body::after{
 
 #home{
 
-    background:
-    linear-gradient(rgba(5,8,22,.82),rgba(5,8,22,.82)),
-    url('images/home-bg.jpg');
+background:
+linear-gradient(rgba(5,8,22,.82),rgba(5,8,22,.82)),
+url('images/home-bg.jpg');
 
-    background-size:cover;
-    background-position:center;
+background-size:cover;
+background-position:center;
 
 }
 
 #articles{
 
-    background:
-    linear-gradient(rgba(20,12,5,.84),rgba(20,12,5,.84)),
-    url('images/articles-bg.jpg');
+background:
+linear-gradient(rgba(20,12,5,.84),rgba(20,12,5,.84)),
+url('images/articles-bg.jpg');
 
-    background-size:cover;
-    background-position:center;
+background-size:cover;
+background-position:center;
 
 }
 
 #reports{
 
-    background:
-    linear-gradient(rgba(10,10,30,.84),rgba(10,10,30,.84)),
-    url('images/reports-bg.jpg');
+background:
+linear-gradient(rgba(10,10,30,.84),rgba(10,10,30,.84)),
+url('images/reports-bg.jpg');
 
-    background-size:cover;
-    background-position:center;
+background-size:cover;
+background-position:center;
 
 }
 
 #education{
 
-    background:
-    linear-gradient(rgba(5,20,15,.84),rgba(5,20,15,.84)),
-    url('images/education-bg.jpg');
+background:
+linear-gradient(rgba(5,20,15,.84),rgba(5,20,15,.84)),
+url('images/education-bg.jpg');
 
-    background-size:cover;
-    background-position:center;
+background-size:cover;
+background-position:center;
 
 }
 
 #job{
 
-    background:
-    linear-gradient(rgba(18,10,5,.84),rgba(18,10,5,.84)),
-    url('images/job-bg.jpg');
+background:
+linear-gradient(rgba(18,10,5,.84),rgba(18,10,5,.84)),
+url('images/job-bg.jpg');
 
-    background-size:cover;
-    background-position:center;
+background-size:cover;
+background-position:center;
 
 }
 
 #club{
 
-    background:
-    linear-gradient(rgba(18,5,20,.84),rgba(18,5,20,.84)),
-    url('images/club-bg.jpg');
+background:
+linear-gradient(rgba(18,5,20,.84),rgba(18,5,20,.84)),
+url('images/club-bg.jpg');
 
-    background-size:cover;
-    background-position:center;
+background-size:cover;
+background-position:center;
 
 }
 
 #about{
 
-    background:
-    linear-gradient(rgba(5,10,20,.84),rgba(5,10,20,.84)),
-    url('images/about-bg.jpg');
+background:
+linear-gradient(rgba(5,10,20,.84),rgba(5,10,20,.84)),
+url('images/about-bg.jpg');
 
-    background-size:cover;
-    background-position:center;
+background-size:cover;
+background-position:center;
+
+}
+
+/* MINI PROFILE */
+
+.page-mini-profile{
+
+position:absolute;
+
+top:30px;
+right:30px;
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+background:rgba(255,255,255,.07);
+
+backdrop-filter:blur(18px);
+
+padding:10px 16px;
+
+border-radius:50px;
+
+border:1px solid rgba(255,255,255,.08);
+
+}
+
+.page-mini-profile img{
+
+width:50px;
+height:50px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+}
+
+.page-mini-profile h4{
+
+font-size:14px;
+
+line-height:1.5;
 
 }
 
@@ -526,47 +623,47 @@ body::after{
 
 .page-banner{
 
-    width:100%;
-    height:320px;
+width:100%;
+height:320px;
 
-    overflow:hidden;
+overflow:hidden;
 
-    border-radius:35px;
+border-radius:35px;
 
-    margin-bottom:40px;
+margin-bottom:40px;
 
 }
 
 .page-banner img{
 
-    width:100%;
-    height:100%;
+width:100%;
+height:100%;
 
-    object-fit:cover;
+object-fit:cover;
 
-    animation:bannerZoom 10s ease infinite alternate;
+animation:bannerZoom 10s ease infinite alternate;
 
 }
 
 @keyframes bannerZoom{
 
-    from{
-        transform:scale(1);
-    }
+from{
+transform:scale(1);
+}
 
-    to{
-        transform:scale(1.12);
-    }
+to{
+transform:scale(1.12);
+}
 
 }
 
 .section-title{
 
-    font-size:58px;
+font-size:58px;
 
-    margin-bottom:35px;
+margin-bottom:35px;
 
-    font-family:'Syne',sans-serif;
+font-family:'Syne',sans-serif;
 
 }
 
@@ -574,207 +671,206 @@ body::after{
 
 .hero{
 
-    display:flex;
+display:flex;
 
-    align-items:center;
+align-items:center;
+justify-content:center;
 
-    justify-content:center;
+gap:60px;
 
-    gap:60px;
-
-    flex-wrap:wrap;
+flex-wrap:wrap;
 
 }
 
 .hero-img img{
 
-    width:380px;
+width:380px;
 
-    border-radius:35px;
+border-radius:35px;
 
 }
 
 .hero-content{
 
-    flex:1;
+flex:1;
 
-    max-width:750px;
+max-width:750px;
 
 }
 
 .hero-content h1{
 
-    font-size:74px;
+font-size:74px;
 
-    line-height:1.1;
+line-height:1.1;
 
-    font-family:'Syne',sans-serif;
+font-family:'Syne',sans-serif;
 
-    margin-bottom:25px;
+margin-bottom:25px;
 
 }
 
 .gradient{
 
-    background:
-    linear-gradient(
-    90deg,
-    #7c3aed,
-    #06b6d4,
-    #3b82f6);
+background:
+linear-gradient(
+90deg,
+#7c3aed,
+#06b6d4,
+#3b82f6);
 
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 
 }
 
 .hero-content p{
 
-    line-height:2;
+line-height:2;
 
-    font-size:18px;
+font-size:18px;
 
 }
 
 .current-box{
 
-    margin-top:35px;
+margin-top:35px;
 
-    background:rgba(255,255,255,.05);
+background:rgba(255,255,255,.05);
 
-    border:1px solid var(--border);
+border:1px solid var(--border);
 
-    padding:30px;
+padding:30px;
 
-    border-radius:28px;
+border-radius:28px;
 
-    line-height:2;
+line-height:2;
 
 }
 
-/* ARTICLE */
+/* ARTICLES */
 
 .article-layout{
 
-    display:grid;
+display:grid;
 
-    grid-template-columns:320px 1fr;
+grid-template-columns:320px 1fr;
 
-    gap:30px;
+gap:30px;
 
 }
 
 .article-sidebar{
 
-    position:sticky;
+position:sticky;
 
-    top:20px;
+top:20px;
 
-    height:calc(100vh - 40px);
+height:calc(100vh - 40px);
 
-    overflow:auto;
+overflow:auto;
 
-    background:var(--card);
+background:var(--card);
 
-    border:1px solid var(--border);
+border:1px solid var(--border);
 
-    border-radius:30px;
+border-radius:30px;
 
-    padding:25px;
+padding:25px;
 
 }
 
 .article-sidebar h3{
 
-    margin-bottom:20px;
+margin-bottom:20px;
 
-    font-size:28px;
+font-size:28px;
 
-    font-family:'Syne',sans-serif;
+font-family:'Syne',sans-serif;
 
 }
 
 .article-sidebar a{
 
-    display:block;
+display:block;
 
-    text-decoration:none;
+text-decoration:none;
 
-    color:var(--text);
+color:var(--text);
 
-    margin-bottom:10px;
+margin-bottom:10px;
 
-    padding:12px;
+padding:12px;
 
-    border-radius:14px;
+border-radius:14px;
 
 }
 
 .article-sidebar a:hover{
 
-    background:rgba(255,255,255,.07);
+background:rgba(255,255,255,.07);
 
 }
 
 .article-wrapper{
 
-    display:grid;
+display:grid;
 
-    grid-template-columns:1fr 1fr;
+grid-template-columns:1fr 1fr;
 
-    gap:30px;
+gap:30px;
 
 }
 
 .article-card{
 
-    background:var(--card);
+background:var(--card);
 
-    border:1px solid var(--border);
+border:1px solid var(--border);
 
-    border-radius:35px;
+border-radius:35px;
 
-    padding:35px;
+padding:35px;
 
-    margin-bottom:30px;
+margin-bottom:30px;
 
 }
 
 .article-card h2{
 
-    margin:15px 0;
+margin:15px 0;
 
-    font-size:30px;
+font-size:30px;
 
-    font-family:'Syne',sans-serif;
+font-family:'Syne',sans-serif;
 
 }
 
 .article-card p{
 
-    line-height:2;
+line-height:2;
 
-    margin-bottom:20px;
+margin-bottom:20px;
 
 }
 
 .read-btn{
 
-    display:inline-block;
+display:inline-block;
 
-    padding:14px 24px;
+padding:14px 24px;
 
-    border-radius:16px;
+border-radius:16px;
 
-    text-decoration:none;
+text-decoration:none;
 
-    color:white;
+color:white;
 
-    background:
-    linear-gradient(
-    135deg,
-    var(--primary),
-    var(--third));
+background:
+linear-gradient(
+135deg,
+var(--primary),
+var(--third));
 
 }
 
@@ -782,50 +878,44 @@ body::after{
 
 .grid{
 
-    display:grid;
+display:grid;
 
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 
-    gap:25px;
+gap:25px;
 
 }
 
 .card{
 
-    background:var(--card);
+background:var(--card);
 
-    border:1px solid var(--border);
+border:1px solid var(--border);
 
-    border-radius:30px;
+border-radius:30px;
 
-    padding:30px;
+padding:30px;
 
 }
 
 .card img{
 
-    width:75px;
-    height:75px;
+width:75px;
+height:75px;
 
-    object-fit:contain;
+object-fit:contain;
 
-    margin-bottom:20px;
+margin-bottom:20px;
 
 }
 
 .card h3{
 
-    font-size:26px;
+font-size:26px;
 
-    margin-bottom:10px;
+margin-bottom:10px;
 
-    font-family:'Syne',sans-serif;
-
-}
-
-.card p{
-
-    line-height:1.9;
+font-family:'Syne',sans-serif;
 
 }
 
@@ -833,37 +923,37 @@ body::after{
 
 .about-box{
 
-    background:var(--card);
+background:var(--card);
 
-    border:1px solid var(--border);
+border:1px solid var(--border);
 
-    border-radius:35px;
+border-radius:35px;
 
-    padding:40px;
+padding:40px;
 
-    line-height:2.2;
+line-height:2.2;
 
 }
 
 .email-box{
 
-    display:inline-block;
+display:inline-block;
 
-    margin-top:25px;
+margin-top:25px;
 
-    padding:15px 24px;
+padding:15px 24px;
 
-    border-radius:18px;
+border-radius:18px;
 
-    background:
-    linear-gradient(
-    135deg,
-    var(--primary),
-    var(--secondary));
+background:
+linear-gradient(
+135deg,
+var(--primary),
+var(--secondary));
 
-    text-decoration:none;
+text-decoration:none;
 
-    color:white;
+color:white;
 
 }
 
@@ -871,41 +961,41 @@ body::after{
 
 footer{
 
-    text-align:center;
+text-align:center;
 
-    padding:60px 20px;
+padding:60px 20px;
 
 }
 
 .socials{
 
-    display:flex;
+display:flex;
 
-    justify-content:center;
+justify-content:center;
 
-    gap:20px;
+gap:20px;
 
-    flex-wrap:wrap;
+flex-wrap:wrap;
 
-    margin-top:25px;
+margin-top:25px;
 
 }
 
 .socials a{
 
-    text-decoration:none;
+text-decoration:none;
 
-    color:white;
+color:white;
 
-    padding:14px 24px;
+padding:14px 24px;
 
-    border-radius:18px;
+border-radius:18px;
 
-    background:
-    linear-gradient(
-    135deg,
-    var(--primary),
-    var(--third));
+background:
+linear-gradient(
+135deg,
+var(--primary),
+var(--third));
 
 }
 
@@ -913,63 +1003,58 @@ footer{
 
 @media(max-width:1100px){
 
-    .article-layout{
+.article-layout{
+grid-template-columns:1fr;
+}
 
-        grid-template-columns:1fr;
-
-    }
-
-    .article-sidebar{
-
-        position:relative;
-
-        height:auto;
-
-    }
+.article-sidebar{
+position:relative;
+height:auto;
+}
 
 }
 
 @media(max-width:900px){
 
-    .main{
+.main{
+padding:20px;
+padding-top:90px;
+}
 
-        padding:20px;
-        padding-top:90px;
+.hero{
+flex-direction:column;
+text-align:center;
+}
 
-    }
+.hero-img img{
+width:100%;
+max-width:340px;
+}
 
-    .hero{
+.hero-content h1{
+font-size:48px;
+}
 
-        flex-direction:column;
+.section-title{
+font-size:42px;
+}
 
-        text-align:center;
+.article-wrapper{
+grid-template-columns:1fr;
+}
 
-    }
+.page-mini-profile{
+position:relative;
+top:0;
+right:0;
+margin-bottom:30px;
+width:max-content;
+}
 
-    .hero-img img{
-
-        width:100%;
-        max-width:340px;
-
-    }
-
-    .hero-content h1{
-
-        font-size:48px;
-
-    }
-
-    .section-title{
-
-        font-size:42px;
-
-    }
-
-    .article-wrapper{
-
-        grid-template-columns:1fr;
-
-    }
+.floating-profile{
+right:15px;
+top:90px;
+}
 
 }
 
@@ -979,17 +1064,43 @@ footer{
 
 <body>
 
+<!-- INTRO -->
+
 <div class="page-intro">
 
 <img src="images/profile.jpg">
 
 </div>
 
+<!-- BUTTONS -->
+
 <button class="menu-btn" onclick="toggleMenu()">
 
 ☰
 
 </button>
+
+<button class="theme-switch" onclick="toggleTheme()">
+
+🌙
+
+</button>
+
+<!-- FLOATING PROFILE -->
+
+<div class="floating-profile" id="floatingProfile">
+
+<img src="images/profile.jpg">
+
+<h4>
+
+Md. Minhazur
+<br>
+Rahman Mahim
+
+</h4>
+
+</div>
 
 <!-- SIDEBAR -->
 
@@ -1015,11 +1126,7 @@ Writer • Journalist • Student
 
 <div class="nav">
 
-<a href="#" onclick="showPage('home')">
-
-Home
-
-</a>
+<a href="#home" onclick="showPage('home')">Home</a>
 
 <div class="menu-title">
 
@@ -1029,13 +1136,13 @@ Writings
 
 <div class="sub-menu">
 
-<a href="#" onclick="showPage('articles')">
+<a href="#articles" onclick="showPage('articles')">
 
 Bengali Articles
 
 </a>
 
-<a href="#" onclick="showPage('reports')">
+<a href="#reports" onclick="showPage('reports')">
 
 Special News Reports
 
@@ -1043,7 +1150,7 @@ Special News Reports
 
 </div>
 
-<a href="#" onclick="showPage('education')">
+<a href="#education" onclick="showPage('education')">
 
 Education
 
@@ -1057,13 +1164,13 @@ Experience
 
 <div class="sub-menu">
 
-<a href="#" onclick="showPage('job')">
+<a href="#job" onclick="showPage('job')">
 
 Job Experience
 
 </a>
 
-<a href="#" onclick="showPage('club')">
+<a href="#club" onclick="showPage('club')">
 
 Clubbing Experience
 
@@ -1071,19 +1178,13 @@ Clubbing Experience
 
 </div>
 
-<a href="#" onclick="showPage('about')">
+<a href="#about" onclick="showPage('about')">
 
 About Me
 
 </a>
 
 </div>
-
-<button class="theme-btn" onclick="toggleTheme()">
-
-Toggle Theme
-
-</button>
 
 </div>
 
@@ -1111,11 +1212,13 @@ Toggle Theme
 
 <div class="hero-content">
 
-<h1>
+<h1 id="profileAnchor">
 
 Md. Minhazur
 <span class="gradient">
+
 Rahman Mahim
+
 </span>
 
 </h1>
@@ -1132,7 +1235,9 @@ professional experiences and leadership activities.
 <div class="current-box">
 
 <strong>
+
 Currently:
+
 </strong>
 
 <br><br>
@@ -1144,10 +1249,7 @@ Islamic University, Bangladesh.
 
 • Working as Islamic University Correspondent at
 
-<a
-href="https://dainikamadershomoy.com"
-target="_blank"
-style="color:#60a5fa;text-decoration:none;">
+<a href="https://dainikamadershomoy.com" target="_blank" style="color:#60a5fa;text-decoration:none;">
 
 Daily Amader Shomoy
 
@@ -1165,9 +1267,17 @@ Daily Amader Shomoy
 
 <div class="page" id="articles">
 
-<div class="page-banner">
+<div class="page-mini-profile">
 
-<img src="images/articles-banner.jpg">
+<img src="images/profile.jpg">
+
+<h4>
+
+Md. Minhazur
+<br>
+Rahman Mahim
+
+</h4>
 
 </div>
 
@@ -1177,249 +1287,23 @@ Bengali Articles
 
 </h1>
 
-<div class="article-layout">
-
-<div class="article-sidebar">
-
-<h3>
-
-Contents
-
-</h3>
-
-<a href="#a1">01. Article 01</a>
-<a href="#a2">02. Article 02</a>
-<a href="#a3">03. Article 03</a>
-<a href="#a4">04. Article 04</a>
-<a href="#a5">05. Article 05</a>
-<a href="#a6">06. Article 06</a>
-<a href="#a7">07. Article 07</a>
-<a href="#a8">08. Article 08</a>
-<a href="#a9">09. Article 09</a>
-<a href="#a10">10. Article 10</a>
-<a href="#a11">11. Article 11</a>
-<a href="#a12">12. Article 12</a>
-<a href="#a13">13. Article 13</a>
-<a href="#a14">14. Article 14</a>
-<a href="#a15">15. Article 15</a>
-<a href="#a16">16. Article 16</a>
-<a href="#a17">17. Article 17</a>
-<a href="#a18">18. Article 18</a>
-<a href="#a19">19. Article 19</a>
-<a href="#a20">20. Article 20</a>
-<a href="#a21">21. Article 21</a>
-<a href="#a22">22. Article 22</a>
-<a href="#a23">23. Article 23</a>
-<a href="#a24">24. Article 24</a>
-<a href="#a25">25. Article 25</a>
-<a href="#a26">26. Article 26</a>
-<a href="#a27">27. Article 27</a>
-<a href="#a28">28. Article 28</a>
-<a href="#a29">29. Article 29</a>
-
-</div>
-
-<div class="article-wrapper">
-
-<div>
-
-<!-- ARTICLE 1-15 -->
-
-<div class="article-card" id="a1">
-<h2>Article 01</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a2">
-<h2>Article 02</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a3">
-<h2>Article 03</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a4">
-<h2>Article 04</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a5">
-<h2>Article 05</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a6">
-<h2>Article 06</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a7">
-<h2>Article 07</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a8">
-<h2>Article 08</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a9">
-<h2>Article 09</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a10">
-<h2>Article 10</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a11">
-<h2>Article 11</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a12">
-<h2>Article 12</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a13">
-<h2>Article 13</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a14">
-<h2>Article 14</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a15">
-<h2>Article 15</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-</div>
-
-<div>
-
-<!-- ARTICLE 16-29 -->
-
-<div class="article-card" id="a16">
-<h2>Article 16</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a17">
-<h2>Article 17</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a18">
-<h2>Article 18</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a19">
-<h2>Article 19</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a20">
-<h2>Article 20</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a21">
-<h2>Article 21</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a22">
-<h2>Article 22</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a23">
-<h2>Article 23</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a24">
-<h2>Article 24</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a25">
-<h2>Article 25</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a26">
-<h2>Article 26</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a27">
-<h2>Article 27</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a28">
-<h2>Article 28</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a29">
-<h2>Article 29</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 </div>
 
 <!-- REPORTS -->
 
 <div class="page" id="reports">
 
-<div class="page-banner">
+<div class="page-mini-profile">
 
-<img src="images/reports-banner.jpg">
+<img src="images/profile.jpg">
+
+<h4>
+
+Md. Minhazur
+<br>
+Rahman Mahim
+
+</h4>
 
 </div>
 
@@ -1429,61 +1313,23 @@ Special News Reports
 
 </h1>
 
-<div class="grid">
-
-<div class="card">
-<h3>Special Report 01</h3>
-<p>Paste report summary here...</p>
-<a href="#" class="read-btn">Read Full Report</a>
-</div>
-
-<div class="card">
-<h3>Special Report 02</h3>
-<p>Paste report summary here...</p>
-<a href="#" class="read-btn">Read Full Report</a>
-</div>
-
-<div class="card">
-<h3>Special Report 03</h3>
-<p>Paste report summary here...</p>
-<a href="#" class="read-btn">Read Full Report</a>
-</div>
-
-<div class="card">
-<h3>Special Report 04</h3>
-<p>Paste report summary here...</p>
-<a href="#" class="read-btn">Read Full Report</a>
-</div>
-
-<div class="card">
-<h3>Special Report 05</h3>
-<p>Paste report summary here...</p>
-<a href="#" class="read-btn">Read Full Report</a>
-</div>
-
-<div class="card">
-<h3>Special Report 06</h3>
-<p>Paste report summary here...</p>
-<a href="#" class="read-btn">Read Full Report</a>
-</div>
-
-<div class="card">
-<h3>Special Report 07</h3>
-<p>Paste report summary here...</p>
-<a href="#" class="read-btn">Read Full Report</a>
-</div>
-
-</div>
-
 </div>
 
 <!-- EDUCATION -->
 
 <div class="page" id="education">
 
-<div class="page-banner">
+<div class="page-mini-profile">
 
-<img src="images/education-banner.jpg">
+<img src="images/profile.jpg">
+
+<h4>
+
+Md. Minhazur
+<br>
+Rahman Mahim
+
+</h4>
 
 </div>
 
@@ -1493,55 +1339,23 @@ Education
 
 </h1>
 
-<div class="grid">
-
-<div class="card">
-
-<img src="images/edu1.png">
-
-<h3>
-
-Islamic University
-
-</h3>
-
-<p>
-
-Biomedical Engineering Department
-
-</p>
-
-</div>
-
-<div class="card">
-
-<img src="images/edu2.png">
-
-<h3>
-
-Your College
-
-</h3>
-
-<p>
-
-Higher Secondary Education
-
-</p>
-
-</div>
-
-</div>
-
 </div>
 
 <!-- JOB -->
 
 <div class="page" id="job">
 
-<div class="page-banner">
+<div class="page-mini-profile">
 
-<img src="images/job-banner.jpg">
+<img src="images/profile.jpg">
+
+<h4>
+
+Md. Minhazur
+<br>
+Rahman Mahim
+
+</h4>
 
 </div>
 
@@ -1551,37 +1365,23 @@ Job Experience
 
 </h1>
 
-<div class="grid">
-
-<div class="card">
-
-<img src="images/job1.png">
-
-<h3>
-
-Daily Amader Shomoy
-
-</h3>
-
-<p>
-
-Islamic University Correspondent
-
-</p>
-
-</div>
-
-</div>
-
 </div>
 
 <!-- CLUB -->
 
 <div class="page" id="club">
 
-<div class="page-banner">
+<div class="page-mini-profile">
 
-<img src="images/club-banner.jpg">
+<img src="images/profile.jpg">
+
+<h4>
+
+Md. Minhazur
+<br>
+Rahman Mahim
+
+</h4>
 
 </div>
 
@@ -1591,37 +1391,23 @@ Clubbing Experience
 
 </h1>
 
-<div class="grid">
-
-<div class="card">
-
-<img src="images/club1.png">
-
-<h3>
-
-Club Name
-
-</h3>
-
-<p>
-
-Leadership / Member
-
-</p>
-
-</div>
-
-</div>
-
 </div>
 
 <!-- ABOUT -->
 
 <div class="page" id="about">
 
-<div class="page-banner">
+<div class="page-mini-profile">
 
-<img src="images/about-banner.jpg">
+<img src="images/profile.jpg">
+
+<h4>
+
+Md. Minhazur
+<br>
+Rahman Mahim
+
+</h4>
 
 </div>
 
@@ -1646,9 +1432,7 @@ research and leadership.
 
 </p>
 
-<a
-href="mailto:mdminhazur44rahman@gmail.com"
-class="email-box">
+<a href="mailto:mdminhazur44rahman@gmail.com" class="email-box">
 
 Contact Me At Email
 
@@ -1699,36 +1483,76 @@ LinkedIn
 
 function showPage(pageId){
 
-    let pages=document.querySelectorAll('.page');
+let pages=document.querySelectorAll('.page');
 
-    pages.forEach(page=>{
+pages.forEach(page=>{
 
-        page.classList.remove('active');
+page.classList.remove('active');
 
-    });
+});
 
-    document.getElementById(pageId).classList.add('active');
+document.getElementById(pageId).classList.add('active');
 
-    window.scrollTo({
-        top:0,
-        behavior:'smooth'
-    });
+window.scrollTo({
+top:0,
+behavior:'smooth'
+});
 
-    document.getElementById('sidebar').classList.remove('show');
+document.getElementById('sidebar').classList.remove('show');
+
+history.pushState(
+null,
+'',
+'#'+pageId
+);
 
 }
 
+window.addEventListener('load',()=>{
+
+let hash=window.location.hash.replace('#','');
+
+if(hash){
+
+showPage(hash);
+
+}
+
+});
+
 function toggleTheme(){
 
-    document.body.classList.toggle('light');
+document.body.classList.toggle('light');
 
 }
 
 function toggleMenu(){
 
-    document.getElementById('sidebar').classList.toggle('show');
+document.getElementById('sidebar').classList.toggle('show');
 
 }
+
+window.addEventListener('scroll',()=>{
+
+let anchor=document.getElementById('profileAnchor');
+
+let floating=document.getElementById('floatingProfile');
+
+if(!anchor || !floating) return;
+
+let rect=anchor.getBoundingClientRect();
+
+if(rect.top < -40){
+
+floating.classList.add('show');
+
+}else{
+
+floating.classList.remove('show');
+
+}
+
+});
 
 </script>
 

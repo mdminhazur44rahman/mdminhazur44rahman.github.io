@@ -9,6 +9,7 @@
 <title>Md. Minhazur Rahman Mahim</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -27,7 +28,7 @@ scroll-behavior:smooth;
 --glass:rgba(255,255,255,.08);
 
 --text:#ffffff;
---muted:#a1a1aa;
+--muted:#b5b5c3;
 
 --border:rgba(255,255,255,.08);
 
@@ -40,8 +41,8 @@ scroll-behavior:smooth;
 body.light{
 
 --bg:#eef2ff;
---card:rgba(255,255,255,.72);
---glass:rgba(255,255,255,.72);
+--card:rgba(255,255,255,.75);
+--glass:rgba(255,255,255,.75);
 
 --text:#111827;
 --muted:#475569;
@@ -156,7 +157,7 @@ transform:scale(.3) rotate(-15deg);
 
 60%{
 opacity:1;
-transform:scale(1.1) rotate(0deg);
+transform:scale(1.1);
 }
 
 100%{
@@ -243,76 +244,6 @@ font-size:22px;
 cursor:pointer;
 
 z-index:999999;
-
-transition:.35s;
-
-}
-
-.theme-switch:hover{
-
-transform:scale(1.08);
-
-}
-
-/* FLOATING PROFILE */
-
-.floating-profile{
-
-position:fixed;
-
-top:20px;
-right:95px;
-
-display:flex;
-
-align-items:center;
-
-gap:12px;
-
-background:rgba(255,255,255,.08);
-
-backdrop-filter:blur(18px);
-
-padding:10px 16px;
-
-border-radius:50px;
-
-border:1px solid rgba(255,255,255,.08);
-
-z-index:999999;
-
-transform:translateY(-120px);
-
-opacity:0;
-
-transition:.7s;
-
-}
-
-.floating-profile.show{
-
-transform:translateY(0);
-
-opacity:1;
-
-}
-
-.floating-profile img{
-
-width:48px;
-height:48px;
-
-border-radius:50%;
-
-object-fit:cover;
-
-}
-
-.floating-profile h4{
-
-font-size:14px;
-
-line-height:1.4;
 
 }
 
@@ -510,7 +441,7 @@ background-position:center;
 #articles{
 
 background:
-linear-gradient(rgba(20,12,5,.84),rgba(20,12,5,.84)),
+linear-gradient(rgba(25,12,5,.85),rgba(25,12,5,.85)),
 url('images/articles-bg.jpg');
 
 background-size:cover;
@@ -521,7 +452,7 @@ background-position:center;
 #reports{
 
 background:
-linear-gradient(rgba(10,10,30,.84),rgba(10,10,30,.84)),
+linear-gradient(rgba(5,10,25,.84),rgba(5,10,25,.84)),
 url('images/reports-bg.jpg');
 
 background-size:cover;
@@ -577,33 +508,37 @@ background-position:center;
 
 .page-mini-profile{
 
-position:absolute;
+position:fixed;
 
-top:30px;
-right:30px;
+top:20px;
+left:95px;
 
 display:flex;
 
 align-items:center;
 
-gap:12px;
+gap:14px;
 
-background:rgba(255,255,255,.07);
+background:rgba(255,255,255,.08);
 
 backdrop-filter:blur(18px);
 
-padding:10px 16px;
+padding:12px 18px;
 
-border-radius:50px;
+border-radius:60px;
 
 border:1px solid rgba(255,255,255,.08);
+
+z-index:999999;
+
+transition:.4s;
 
 }
 
 .page-mini-profile img{
 
-width:50px;
-height:50px;
+width:52px;
+height:52px;
 
 border-radius:50%;
 
@@ -611,11 +546,44 @@ object-fit:cover;
 
 }
 
-.page-mini-profile h4{
+.page-mini-profile-text{
+
+display:flex;
+flex-direction:column;
+
+}
+
+.page-mini-profile-text h4{
 
 font-size:14px;
 
-line-height:1.5;
+line-height:1.4;
+
+}
+
+.page-mini-profile-text span{
+
+font-size:12px;
+
+margin-top:2px;
+
+opacity:0;
+
+max-height:0;
+
+overflow:hidden;
+
+transition:.4s;
+
+color:#cbd5e1;
+
+}
+
+.page-mini-profile.scrolled span{
+
+opacity:1;
+
+max-height:30px;
 
 }
 
@@ -656,6 +624,8 @@ transform:scale(1.12);
 }
 
 }
+
+/* TITLES */
 
 .section-title{
 
@@ -838,7 +808,7 @@ margin-bottom:30px;
 
 .article-card h2{
 
-margin:15px 0;
+margin-bottom:15px;
 
 font-size:30px;
 
@@ -1018,7 +988,7 @@ height:auto;
 
 .main{
 padding:20px;
-padding-top:90px;
+padding-top:100px;
 }
 
 .hero{
@@ -1044,16 +1014,19 @@ grid-template-columns:1fr;
 }
 
 .page-mini-profile{
-position:relative;
-top:0;
-right:0;
-margin-bottom:30px;
-width:max-content;
+
+left:15px;
+top:90px;
+
+padding:10px 14px;
+
 }
 
-.floating-profile{
-right:15px;
-top:90px;
+.page-mini-profile img{
+
+width:44px;
+height:44px;
+
 }
 
 }
@@ -1085,22 +1058,6 @@ top:90px;
 🌙
 
 </button>
-
-<!-- FLOATING PROFILE -->
-
-<div class="floating-profile" id="floatingProfile">
-
-<img src="images/profile.jpg">
-
-<h4>
-
-Md. Minhazur
-<br>
-Rahman Mahim
-
-</h4>
-
-</div>
 
 <!-- SIDEBAR -->
 
@@ -1152,9 +1109,7 @@ Special News Reports
 
 <a href="#education" onclick="showPage('education')">
 
-Education
-
-</a>
+Education</a>
 
 <div class="menu-title">
 
@@ -1188,6 +1143,32 @@ About Me
 
 </div>
 
+<!-- FLOATING PROFILE -->
+
+<div class="page-mini-profile" id="miniProfile">
+
+<img src="images/profile.jpg">
+
+<div class="page-mini-profile-text">
+
+<h4>
+
+Md. Minhazur
+<br>
+Rahman Mahim
+
+</h4>
+
+<span id="pageName">
+
+Home
+
+</span>
+
+</div>
+
+</div>
+
 <!-- MAIN -->
 
 <div class="main">
@@ -1212,7 +1193,7 @@ About Me
 
 <div class="hero-content">
 
-<h1 id="profileAnchor">
+<h1>
 
 Md. Minhazur
 <span class="gradient">
@@ -1267,25 +1248,113 @@ Daily Amader Shomoy
 
 <div class="page" id="articles">
 
-<div class="page-mini-profile">
-
-<img src="images/profile.jpg">
-
-<h4>
-
-Md. Minhazur
-<br>
-Rahman Mahim
-
-</h4>
-
-</div>
-
 <h1 class="section-title">
 
 Bengali Articles
 
 </h1>
+
+<div class="article-layout">
+
+<div class="article-sidebar">
+
+<h3>
+
+Contents
+
+</h3>
+
+<a href="#a29">29. Article 29</a>
+<a href="#a28">28. Article 28</a>
+<a href="#a27">27. Article 27</a>
+<a href="#a26">26. Article 26</a>
+<a href="#a25">25. Article 25</a>
+<a href="#a24">24. Article 24</a>
+<a href="#a23">23. Article 23</a>
+<a href="#a22">22. Article 22</a>
+<a href="#a21">21. Article 21</a>
+<a href="#a20">20. Article 20</a>
+<a href="#a19">19. Article 19</a>
+<a href="#a18">18. Article 18</a>
+<a href="#a17">17. Article 17</a>
+<a href="#a16">16. Article 16</a>
+<a href="#a15">15. Article 15</a>
+<a href="#a14">14. Article 14</a>
+<a href="#a13">13. Article 13</a>
+<a href="#a12">12. Article 12</a>
+<a href="#a11">11. Article 11</a>
+<a href="#a10">10. Article 10</a>
+<a href="#a9">09. Article 09</a>
+<a href="#a8">08. Article 08</a>
+<a href="#a7">07. Article 07</a>
+<a href="#a6">06. Article 06</a>
+<a href="#a5">05. Article 05</a>
+<a href="#a4">04. Article 04</a>
+<a href="#a3">03. Article 03</a>
+<a href="#a2">02. Article 02</a>
+<a href="#a1">01. Article 01</a>
+
+</div>
+
+<div class="article-wrapper">
+
+<div class="article-card" id="a29">
+<h2>Article 29</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
+
+<div class="article-card" id="a28">
+<h2>Article 28</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
+
+<div class="article-card" id="a27">
+<h2>Article 27</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
+
+<div class="article-card" id="a26">
+<h2>Article 26</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
+
+<div class="article-card" id="a25">
+<h2>Article 25</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
+
+<div class="article-card" id="a24">
+<h2>Article 24</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
+
+<div class="article-card" id="a23">
+<h2>Article 23</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
+
+<div class="article-card" id="a22">
+<h2>Article 22</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
+
+<div class="article-card" id="a21">
+<h2>Article 21</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1293,25 +1362,33 @@ Bengali Articles
 
 <div class="page" id="reports">
 
-<div class="page-mini-profile">
-
-<img src="images/profile.jpg">
-
-<h4>
-
-Md. Minhazur
-<br>
-Rahman Mahim
-
-</h4>
-
-</div>
-
 <h1 class="section-title">
 
 Special News Reports
 
 </h1>
+
+<div class="grid">
+
+<div class="card">
+<h3>Special Report 07</h3>
+<p>Paste report summary here...</p>
+<a href="#" class="read-btn">Read Full Report</a>
+</div>
+
+<div class="card">
+<h3>Special Report 06</h3>
+<p>Paste report summary here...</p>
+<a href="#" class="read-btn">Read Full Report</a>
+</div>
+
+<div class="card">
+<h3>Special Report 05</h3>
+<p>Paste report summary here...</p>
+<a href="#" class="read-btn">Read Full Report</a>
+</div>
+
+</div>
 
 </div>
 
@@ -1319,25 +1396,51 @@ Special News Reports
 
 <div class="page" id="education">
 
-<div class="page-mini-profile">
-
-<img src="images/profile.jpg">
-
-<h4>
-
-Md. Minhazur
-<br>
-Rahman Mahim
-
-</h4>
-
-</div>
-
 <h1 class="section-title">
 
 Education
 
 </h1>
+
+<div class="grid">
+
+<div class="card">
+
+<img src="images/edu1.png">
+
+<h3>
+
+Islamic University
+
+</h3>
+
+<p>
+
+Biomedical Engineering Department
+
+</p>
+
+</div>
+
+<div class="card">
+
+<img src="images/edu2.png">
+
+<h3>
+
+Your College
+
+</h3>
+
+<p>
+
+Higher Secondary Education
+
+</p>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1345,25 +1448,33 @@ Education
 
 <div class="page" id="job">
 
-<div class="page-mini-profile">
-
-<img src="images/profile.jpg">
-
-<h4>
-
-Md. Minhazur
-<br>
-Rahman Mahim
-
-</h4>
-
-</div>
-
 <h1 class="section-title">
 
 Job Experience
 
 </h1>
+
+<div class="grid">
+
+<div class="card">
+
+<img src="images/job1.png">
+
+<h3>
+
+Daily Amader Shomoy
+
+</h3>
+
+<p>
+
+Islamic University Correspondent
+
+</p>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1371,45 +1482,39 @@ Job Experience
 
 <div class="page" id="club">
 
-<div class="page-mini-profile">
-
-<img src="images/profile.jpg">
-
-<h4>
-
-Md. Minhazur
-<br>
-Rahman Mahim
-
-</h4>
-
-</div>
-
 <h1 class="section-title">
 
 Clubbing Experience
 
 </h1>
 
+<div class="grid">
+
+<div class="card">
+
+<img src="images/club1.png">
+
+<h3>
+
+Club Name
+
+</h3>
+
+<p>
+
+Leadership / Member
+
+</p>
+
+</div>
+
+</div>
+
 </div>
 
 <!-- ABOUT -->
 
 <div class="page" id="about">
-
-<div class="page-mini-profile">
-
-<img src="images/profile.jpg">
-
-<h4>
-
-Md. Minhazur
-<br>
-Rahman Mahim
-
-</h4>
-
-</div>
 
 <h1 class="section-title">
 
@@ -1481,6 +1586,18 @@ LinkedIn
 
 <script>
 
+const pageTitles={
+
+home:'Home',
+articles:'Bengali Articles',
+reports:'Special News Reports',
+education:'Education',
+job:'Job Experience',
+club:'Clubbing Experience',
+about:'About Me'
+
+};
+
 function showPage(pageId){
 
 let pages=document.querySelectorAll('.page');
@@ -1505,6 +1622,9 @@ null,
 '',
 '#'+pageId
 );
+
+document.getElementById('pageName').innerText=
+pageTitles[pageId];
 
 }
 
@@ -1534,21 +1654,15 @@ document.getElementById('sidebar').classList.toggle('show');
 
 window.addEventListener('scroll',()=>{
 
-let anchor=document.getElementById('profileAnchor');
+let mini=document.getElementById('miniProfile');
 
-let floating=document.getElementById('floatingProfile');
+if(window.scrollY > 120){
 
-if(!anchor || !floating) return;
-
-let rect=anchor.getBoundingClientRect();
-
-if(rect.top < -40){
-
-floating.classList.add('show');
+mini.classList.add('scrolled');
 
 }else{
 
-floating.classList.remove('show');
+mini.classList.remove('scrolled');
 
 }
 

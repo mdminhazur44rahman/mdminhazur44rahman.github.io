@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -23,11 +22,11 @@
 :root{
 
     --bg:#050816;
-    --card:rgba(255,255,255,.05);
-    --glass:rgba(255,255,255,.06);
+    --card:rgba(255,255,255,.06);
+    --glass:rgba(255,255,255,.07);
 
     --text:#ffffff;
-    --muted:#94a3b8;
+    --muted:#a1a1aa;
 
     --border:rgba(255,255,255,.08);
 
@@ -40,8 +39,8 @@
 body.light{
 
     --bg:#eef2ff;
-    --card:rgba(255,255,255,.75);
-    --glass:rgba(255,255,255,.75);
+    --card:rgba(255,255,255,.72);
+    --glass:rgba(255,255,255,.72);
 
     --text:#111827;
     --muted:#475569;
@@ -50,18 +49,10 @@ body.light{
 
 }
 
-*::-webkit-scrollbar{
-    width:7px;
-}
-
-*::-webkit-scrollbar-thumb{
-    background:linear-gradient(var(--primary),var(--secondary));
-    border-radius:20px;
-}
-
 body{
 
     background:var(--bg);
+
     color:var(--text);
 
     font-family:'Inter',sans-serif;
@@ -86,7 +77,7 @@ body::before{
     background:
     radial-gradient(circle,var(--primary),transparent 70%);
 
-    top:-300px;
+    top:-250px;
     left:-250px;
 
     filter:blur(130px);
@@ -109,7 +100,7 @@ body::after{
     background:
     radial-gradient(circle,var(--secondary),transparent 70%);
 
-    bottom:-300px;
+    bottom:-250px;
     right:-250px;
 
     filter:blur(130px);
@@ -147,15 +138,15 @@ body::after{
     width:230px;
     height:230px;
 
-    object-fit:cover;
-
     border-radius:50%;
+
+    object-fit:cover;
 
     border:5px solid rgba(255,255,255,.15);
 
     box-shadow:
-    0 0 50px rgba(124,58,237,.6),
-    0 0 120px rgba(6,182,212,.4);
+    0 0 60px rgba(124,58,237,.55),
+    0 0 120px rgba(6,182,212,.35);
 
     animation:introZoom 2.5s ease;
 
@@ -173,7 +164,7 @@ body::after{
 
     }
 
-    50%{
+    60%{
 
         opacity:1;
 
@@ -226,8 +217,8 @@ body::after{
     top:20px;
     left:20px;
 
-    width:55px;
-    height:55px;
+    width:58px;
+    height:58px;
 
     border:none;
 
@@ -245,7 +236,7 @@ body::after{
 
     cursor:pointer;
 
-    z-index:99999;
+    z-index:999999;
 
     box-shadow:
     0 0 30px rgba(124,58,237,.35);
@@ -261,7 +252,7 @@ body::after{
     top:20px;
     left:-350px;
 
-    width:310px;
+    width:320px;
     height:calc(100vh - 40px);
 
     background:var(--glass);
@@ -276,7 +267,7 @@ body::after{
 
     overflow:auto;
 
-    z-index:9999;
+    z-index:99999;
 
     transition:.45s;
 
@@ -301,9 +292,9 @@ body::after{
     width:125px;
     height:125px;
 
-    object-fit:cover;
-
     border-radius:50%;
+
+    object-fit:cover;
 
     border:3px solid rgba(255,255,255,.15);
 
@@ -316,7 +307,7 @@ body::after{
 
     margin-top:18px;
 
-    font-size:25px;
+    font-size:26px;
 
     font-family:'Syne',sans-serif;
 
@@ -360,9 +351,9 @@ body::after{
 
 .nav a:hover{
 
-    background:rgba(255,255,255,.06);
+    background:rgba(255,255,255,.07);
 
-    transform:translateX(7px);
+    transform:translateX(6px);
 
 }
 
@@ -398,7 +389,7 @@ body::after{
 
     width:100%;
 
-    padding:45px;
+    padding:40px;
 
 }
 
@@ -409,6 +400,12 @@ body::after{
     display:none;
 
     animation:fade .5s ease;
+
+    border-radius:40px;
+
+    padding:40px;
+
+    min-height:100vh;
 
 }
 
@@ -436,25 +433,126 @@ body::after{
 
 }
 
-/* HOME */
+/* PAGE THEMES */
 
 #home{
 
-    min-height:100vh;
-
     background:
-    radial-gradient(circle at top left,rgba(124,58,237,.12),transparent 40%),
-    radial-gradient(circle at bottom right,rgba(6,182,212,.12),transparent 40%);
+    linear-gradient(rgba(5,8,22,.82),rgba(5,8,22,.82)),
+    url('images/home-bg.jpg');
 
-    border-radius:40px;
-
-    padding:40px;
+    background-size:cover;
+    background-position:center;
 
 }
 
-.hero{
+#articles{
 
-    min-height:85vh;
+    background:
+    linear-gradient(rgba(20,12,5,.84),rgba(20,12,5,.84)),
+    url('images/articles-bg.jpg');
+
+    background-size:cover;
+    background-position:center;
+
+}
+
+#education{
+
+    background:
+    linear-gradient(rgba(5,20,15,.84),rgba(5,20,15,.84)),
+    url('images/education-bg.jpg');
+
+    background-size:cover;
+    background-position:center;
+
+}
+
+#job{
+
+    background:
+    linear-gradient(rgba(18,10,5,.84),rgba(18,10,5,.84)),
+    url('images/job-bg.jpg');
+
+    background-size:cover;
+    background-position:center;
+
+}
+
+#club{
+
+    background:
+    linear-gradient(rgba(18,5,20,.84),rgba(18,5,20,.84)),
+    url('images/club-bg.jpg');
+
+    background-size:cover;
+    background-position:center;
+
+}
+
+#about{
+
+    background:
+    linear-gradient(rgba(5,10,20,.84),rgba(5,10,20,.84)),
+    url('images/about-bg.jpg');
+
+    background-size:cover;
+    background-position:center;
+
+}
+
+/* PAGE BANNER */
+
+.page-banner{
+
+    width:100%;
+
+    height:320px;
+
+    border-radius:35px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    margin-bottom:40px;
+
+    border:1px solid var(--border);
+
+}
+
+.page-banner img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    animation:bannerZoom 10s ease infinite alternate;
+
+    filter:brightness(.75);
+
+}
+
+@keyframes bannerZoom{
+
+    from{
+
+        transform:scale(1);
+
+    }
+
+    to{
+
+        transform:scale(1.12);
+
+    }
+
+}
+
+/* HERO */
+
+.hero{
 
     display:flex;
 
@@ -476,10 +574,6 @@ body::after{
 
     border:1px solid var(--border);
 
-    box-shadow:
-    0 0 50px rgba(124,58,237,.3),
-    0 0 120px rgba(6,182,212,.2);
-
 }
 
 .hero-content{
@@ -492,7 +586,7 @@ body::after{
 
 .hero-content h1{
 
-    font-size:75px;
+    font-size:74px;
 
     line-height:1.1;
 
@@ -519,9 +613,9 @@ body::after{
 
 .hero-content p{
 
-    font-size:18px;
-
     line-height:2;
+
+    font-size:18px;
 
 }
 
@@ -555,19 +649,7 @@ body::after{
 
 }
 
-/* ARTICLES */
-
-#articles{
-
-    background:
-    radial-gradient(circle at top right,rgba(251,191,36,.12),transparent 40%),
-    radial-gradient(circle at bottom left,rgba(239,68,68,.10),transparent 40%);
-
-    border-radius:40px;
-
-    padding:40px;
-
-}
+/* ARTICLE */
 
 .article-layout{
 
@@ -631,9 +713,19 @@ body::after{
 
 .article-sidebar a:hover{
 
-    background:rgba(255,255,255,.06);
+    background:rgba(255,255,255,.07);
 
     transform:translateX(5px);
+
+}
+
+.article-wrapper{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:30px;
 
 }
 
@@ -657,17 +749,17 @@ body::after{
 
     color:var(--muted);
 
-    font-size:13px;
-
     letter-spacing:2px;
+
+    font-size:13px;
 
 }
 
 .article-card h2{
 
-    font-size:34px;
-
     margin:15px 0;
+
+    font-size:34px;
 
     font-family:'Syne',sans-serif;
 
@@ -703,61 +795,7 @@ body::after{
 
 }
 
-/* EDUCATION */
-
-#education{
-
-    background:
-    radial-gradient(circle at top left,rgba(34,197,94,.12),transparent 40%),
-    radial-gradient(circle at bottom right,rgba(59,130,246,.10),transparent 40%);
-
-    border-radius:40px;
-
-    padding:40px;
-
-}
-
-/* JOB */
-
-#job{
-
-    background:
-    radial-gradient(circle at top left,rgba(249,115,22,.12),transparent 40%),
-    radial-gradient(circle at bottom right,rgba(168,85,247,.10),transparent 40%);
-
-    border-radius:40px;
-
-    padding:40px;
-
-}
-
-/* CLUB */
-
-#club{
-
-    background:
-    radial-gradient(circle at top left,rgba(236,72,153,.12),transparent 40%),
-    radial-gradient(circle at bottom right,rgba(14,165,233,.10),transparent 40%);
-
-    border-radius:40px;
-
-    padding:40px;
-
-}
-
-/* ABOUT */
-
-#about{
-
-    background:
-    radial-gradient(circle at top left,rgba(99,102,241,.12),transparent 40%),
-    radial-gradient(circle at bottom right,rgba(16,185,129,.10),transparent 40%);
-
-    border-radius:40px;
-
-    padding:40px;
-
-}
+/* GRID */
 
 .grid{
 
@@ -817,6 +855,8 @@ body::after{
     line-height:1.9;
 
 }
+
+/* ABOUT */
 
 .about-box{
 
@@ -884,11 +924,13 @@ footer{
 
 .socials a{
 
-    text-decoration:none;
+    width:58px;
+    height:58px;
 
-    color:white;
+    display:flex;
 
-    padding:14px 24px;
+    justify-content:center;
+    align-items:center;
 
     border-radius:18px;
 
@@ -897,6 +939,15 @@ footer{
     135deg,
     var(--primary),
     var(--third));
+
+}
+
+.socials img{
+
+    width:28px;
+    height:28px;
+
+    object-fit:contain;
 
 }
 
@@ -924,7 +975,7 @@ footer{
 
     .main{
 
-        padding:25px;
+        padding:20px;
         padding-top:90px;
 
     }
@@ -956,6 +1007,12 @@ footer{
 
     }
 
+    .article-wrapper{
+
+        grid-template-columns:1fr;
+
+    }
+
 }
 
 </style>
@@ -964,15 +1021,11 @@ footer{
 
 <body>
 
-<!-- INTRO -->
-
 <div class="page-intro">
 
-    <img src="images/profile.jpg">
+<img src="images/profile.jpg">
 
 </div>
-
-<!-- MENU BUTTON -->
 
 <button class="menu-btn" onclick="toggleMenu()">
 
@@ -984,53 +1037,45 @@ footer{
 
 <div class="sidebar" id="sidebar">
 
-    <div class="profile">
+<div class="profile">
 
-        <img src="images/profile.jpg">
+<img src="images/profile.jpg">
 
-        <h2>
-            Md. Minhazur Rahman Mahim
-        </h2>
+<h2>
 
-        <p>
-            Writer • Journalist • Student
-        </p>
+Md. Minhazur Rahman Mahim
 
-    </div>
+</h2>
 
-    <div class="nav">
+<p>
 
-        <a href="#" onclick="showPage('home')">
-            Home
-        </a>
+Writer • Journalist • Student
 
-        <a href="#" onclick="showPage('articles')">
-            Bengali Articles
-        </a>
+</p>
 
-        <a href="#" onclick="showPage('education')">
-            Education
-        </a>
+</div>
 
-        <a href="#" onclick="showPage('job')">
-            Job Experience
-        </a>
+<div class="nav">
 
-        <a href="#" onclick="showPage('club')">
-            Clubbing Experience
-        </a>
+<a href="#" onclick="showPage('home')">Home</a>
 
-        <a href="#" onclick="showPage('about')">
-            About Me
-        </a>
+<a href="#" onclick="showPage('articles')">Bengali Articles</a>
 
-    </div>
+<a href="#" onclick="showPage('education')">Education</a>
 
-    <button class="theme-btn" onclick="toggleTheme()">
+<a href="#" onclick="showPage('job')">Job Experience</a>
 
-        Toggle Theme
+<a href="#" onclick="showPage('club')">Clubbing Experience</a>
 
-    </button>
+<a href="#" onclick="showPage('about')">About Me</a>
+
+</div>
+
+<button class="theme-btn" onclick="toggleTheme()">
+
+Toggle Theme
+
+</button>
 
 </div>
 
@@ -1041,6 +1086,12 @@ footer{
 <!-- HOME -->
 
 <div class="page active" id="home">
+
+<div class="page-banner">
+
+<img src="images/profile.jpg">
+
+</div>
 
 <div class="hero">
 
@@ -1106,6 +1157,12 @@ Daily Amader Shomoy
 
 <div class="page" id="articles">
 
+<div class="page-banner">
+
+<img src="images/articles-banner.jpg">
+
+</div>
+
 <h1 class="section-title">
 
 Bengali Articles
@@ -1114,12 +1171,12 @@ Bengali Articles
 
 <div class="article-layout">
 
-<!-- CONTENTS -->
-
 <div class="article-sidebar">
 
 <h3>
+
 Contents
+
 </h3>
 
 <a href="#a1">01. Article Title</a>
@@ -1154,11 +1211,9 @@ Contents
 
 </div>
 
-<!-- ARTICLES -->
+<div class="article-wrapper">
 
 <div>
-
-<!-- ARTICLE TEMPLATE -->
 
 <div class="article-card" id="a1">
 
@@ -1188,7 +1243,39 @@ Read At Newspaper
 
 </div>
 
-<!-- COPY THIS CARD UNTIL ARTICLE 29 -->
+</div>
+
+<div>
+
+<div class="article-card" id="a16">
+
+<span class="article-number">
+
+ARTICLE 16
+
+</span>
+
+<h2>
+
+Your Article Title
+
+</h2>
+
+<p>
+
+Paste your article here...
+
+</p>
+
+<a href="#" class="read-btn">
+
+Read At Newspaper
+
+</a>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1199,6 +1286,12 @@ Read At Newspaper
 <!-- EDUCATION -->
 
 <div class="page" id="education">
+
+<div class="page-banner">
+
+<img src="images/education-banner.jpg">
+
+</div>
 
 <h1 class="section-title">
 
@@ -1252,6 +1345,12 @@ Higher Secondary Education
 
 <div class="page" id="job">
 
+<div class="page-banner">
+
+<img src="images/job-banner.jpg">
+
+</div>
+
 <h1 class="section-title">
 
 Job Experience
@@ -1286,6 +1385,12 @@ Islamic University Correspondent
 
 <div class="page" id="club">
 
+<div class="page-banner">
+
+<img src="images/club-banner.jpg">
+
+</div>
+
 <h1 class="section-title">
 
 Clubbing Experience
@@ -1319,6 +1424,12 @@ Leadership / Member
 <!-- ABOUT -->
 
 <div class="page" id="about">
+
+<div class="page-banner">
+
+<img src="images/about-banner.jpg">
+
+</div>
 
 <h1 class="section-title">
 
@@ -1372,19 +1483,19 @@ All Rights Reserved.
 
 <a href="https://facebook.com/mdminhazur44rahman" target="_blank">
 
-Facebook
+<img src="images/facebook.png">
 
 </a>
 
 <a href="https://instagram.com/mdminhazurrahmanmahim" target="_blank">
 
-Instagram
+<img src="images/instagram.png">
 
 </a>
 
 <a href="https://linkedin.com/in/mdminhazur44rahman" target="_blank">
 
-LinkedIn
+<img src="images/linkedin.png">
 
 </a>
 
@@ -1408,13 +1519,12 @@ function showPage(pageId){
 
     document.getElementById(pageId).classList.add('active');
 
-    window.scrollTo(0,0);
+    window.scrollTo({
+        top:0,
+        behavior:'smooth'
+    });
 
-    if(window.innerWidth < 900){
-
-        document.getElementById('sidebar').classList.remove('show');
-
-    }
+    document.getElementById('sidebar').classList.remove('show');
 
 }
 
@@ -1433,5 +1543,4 @@ function toggleMenu(){
 </script>
 
 </body>
-
 </html>

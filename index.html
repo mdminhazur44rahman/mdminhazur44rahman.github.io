@@ -8,6 +8,7 @@
 <title>Md. Minhazur Rahman Mahim</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -52,7 +53,6 @@ body.light{
 body{
 
     background:var(--bg);
-
     color:var(--text);
 
     font-family:'Inter',sans-serif;
@@ -187,23 +187,17 @@ body::after{
 @keyframes introHide{
 
     0%{
-
         opacity:1;
         visibility:visible;
-
     }
 
     85%{
-
         opacity:1;
-
     }
 
     100%{
-
         opacity:0;
         visibility:hidden;
-
     }
 
 }
@@ -237,9 +231,6 @@ body::after{
     cursor:pointer;
 
     z-index:999999;
-
-    box-shadow:
-    0 0 30px rgba(124,58,237,.35);
 
 }
 
@@ -298,9 +289,6 @@ body::after{
 
     border:3px solid rgba(255,255,255,.15);
 
-    box-shadow:
-    0 0 40px rgba(124,58,237,.35);
-
 }
 
 .profile h2{
@@ -318,8 +306,6 @@ body::after{
     margin-top:8px;
 
     color:var(--muted);
-
-    font-size:14px;
 
 }
 
@@ -339,13 +325,11 @@ body::after{
 
     color:var(--text);
 
-    padding:16px 18px;
+    padding:15px 18px;
 
     border-radius:18px;
 
-    transition:.35s;
-
-    font-weight:500;
+    transition:.3s;
 
 }
 
@@ -354,6 +338,36 @@ body::after{
     background:rgba(255,255,255,.07);
 
     transform:translateX(6px);
+
+}
+
+.menu-title{
+
+    margin-top:20px;
+
+    margin-bottom:8px;
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    padding-left:10px;
+
+}
+
+.sub-menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    margin-left:15px;
 
 }
 
@@ -418,17 +432,13 @@ body::after{
 @keyframes fade{
 
     from{
-
         opacity:0;
         transform:translateY(20px);
-
     }
 
     to{
-
         opacity:1;
         transform:translateY(0);
-
     }
 
 }
@@ -451,6 +461,17 @@ body::after{
     background:
     linear-gradient(rgba(20,12,5,.84),rgba(20,12,5,.84)),
     url('images/articles-bg.jpg');
+
+    background-size:cover;
+    background-position:center;
+
+}
+
+#reports{
+
+    background:
+    linear-gradient(rgba(10,10,30,.84),rgba(10,10,30,.84)),
+    url('images/reports-bg.jpg');
 
     background-size:cover;
     background-position:center;
@@ -506,18 +527,13 @@ body::after{
 .page-banner{
 
     width:100%;
-
     height:320px;
-
-    border-radius:35px;
 
     overflow:hidden;
 
-    position:relative;
+    border-radius:35px;
 
     margin-bottom:40px;
-
-    border:1px solid var(--border);
 
 }
 
@@ -530,23 +546,27 @@ body::after{
 
     animation:bannerZoom 10s ease infinite alternate;
 
-    filter:brightness(.75);
-
 }
 
 @keyframes bannerZoom{
 
     from{
-
         transform:scale(1);
-
     }
 
     to{
-
         transform:scale(1.12);
-
     }
+
+}
+
+.section-title{
+
+    font-size:58px;
+
+    margin-bottom:35px;
+
+    font-family:'Syne',sans-serif;
 
 }
 
@@ -571,8 +591,6 @@ body::after{
     width:380px;
 
     border-radius:35px;
-
-    border:1px solid var(--border);
 
 }
 
@@ -606,7 +624,6 @@ body::after{
     #3b82f6);
 
     -webkit-background-clip:text;
-
     -webkit-text-fill-color:transparent;
 
 }
@@ -632,20 +649,6 @@ body::after{
     border-radius:28px;
 
     line-height:2;
-
-    backdrop-filter:blur(20px);
-
-}
-
-/* SECTION */
-
-.section-title{
-
-    font-size:58px;
-
-    margin-bottom:35px;
-
-    font-family:'Syne',sans-serif;
 
 }
 
@@ -679,15 +682,13 @@ body::after{
 
     padding:25px;
 
-    backdrop-filter:blur(20px);
-
 }
 
 .article-sidebar h3{
 
     margin-bottom:20px;
 
-    font-size:30px;
+    font-size:28px;
 
     font-family:'Syne',sans-serif;
 
@@ -707,15 +708,11 @@ body::after{
 
     border-radius:14px;
 
-    transition:.3s;
-
 }
 
 .article-sidebar a:hover{
 
     background:rgba(255,255,255,.07);
-
-    transform:translateX(5px);
 
 }
 
@@ -741,25 +738,13 @@ body::after{
 
     margin-bottom:30px;
 
-    backdrop-filter:blur(20px);
-
-}
-
-.article-number{
-
-    color:var(--muted);
-
-    letter-spacing:2px;
-
-    font-size:13px;
-
 }
 
 .article-card h2{
 
     margin:15px 0;
 
-    font-size:34px;
+    font-size:30px;
 
     font-family:'Syne',sans-serif;
 
@@ -767,9 +752,9 @@ body::after{
 
 .article-card p{
 
-    line-height:2.1;
+    line-height:2;
 
-    margin-bottom:25px;
+    margin-bottom:20px;
 
 }
 
@@ -790,8 +775,6 @@ body::after{
     135deg,
     var(--primary),
     var(--third));
-
-    font-weight:600;
 
 }
 
@@ -816,16 +799,6 @@ body::after{
     border-radius:30px;
 
     padding:30px;
-
-    backdrop-filter:blur(20px);
-
-    transition:.35s;
-
-}
-
-.card:hover{
-
-    transform:translateY(-10px);
 
 }
 
@@ -870,8 +843,6 @@ body::after{
 
     line-height:2.2;
 
-    backdrop-filter:blur(20px);
-
 }
 
 .email-box{
@@ -894,8 +865,6 @@ body::after{
 
     color:white;
 
-    font-weight:600;
-
 }
 
 /* FOOTER */
@@ -914,7 +883,7 @@ footer{
 
     justify-content:center;
 
-    gap:18px;
+    gap:20px;
 
     flex-wrap:wrap;
 
@@ -924,13 +893,11 @@ footer{
 
 .socials a{
 
-    width:58px;
-    height:58px;
+    text-decoration:none;
 
-    display:flex;
+    color:white;
 
-    justify-content:center;
-    align-items:center;
+    padding:14px 24px;
 
     border-radius:18px;
 
@@ -939,15 +906,6 @@ footer{
     135deg,
     var(--primary),
     var(--third));
-
-}
-
-.socials img{
-
-    width:28px;
-    height:28px;
-
-    object-fit:contain;
 
 }
 
@@ -1057,17 +1015,67 @@ Writer • Journalist • Student
 
 <div class="nav">
 
-<a href="#" onclick="showPage('home')">Home</a>
+<a href="#" onclick="showPage('home')">
 
-<a href="#" onclick="showPage('articles')">Bengali Articles</a>
+Home
 
-<a href="#" onclick="showPage('education')">Education</a>
+</a>
 
-<a href="#" onclick="showPage('job')">Job Experience</a>
+<div class="menu-title">
 
-<a href="#" onclick="showPage('club')">Clubbing Experience</a>
+Writings
 
-<a href="#" onclick="showPage('about')">About Me</a>
+</div>
+
+<div class="sub-menu">
+
+<a href="#" onclick="showPage('articles')">
+
+Bengali Articles
+
+</a>
+
+<a href="#" onclick="showPage('reports')">
+
+Special News Reports
+
+</a>
+
+</div>
+
+<a href="#" onclick="showPage('education')">
+
+Education
+
+</a>
+
+<div class="menu-title">
+
+Experience
+
+</div>
+
+<div class="sub-menu">
+
+<a href="#" onclick="showPage('job')">
+
+Job Experience
+
+</a>
+
+<a href="#" onclick="showPage('club')">
+
+Clubbing Experience
+
+</a>
+
+</div>
+
+<a href="#" onclick="showPage('about')">
+
+About Me
+
+</a>
 
 </div>
 
@@ -1129,17 +1137,17 @@ Currently:
 
 <br><br>
 
-• Studying at the Biomedical Engineering Department,
+• Studying at Biomedical Engineering Department,
 Islamic University, Bangladesh.
 
 <br><br>
 
-• Working as the Islamic University Correspondent at
+• Working as Islamic University Correspondent at
 
 <a
 href="https://dainikamadershomoy.com"
 target="_blank"
-style="color:#60a5fa;text-decoration:none;font-weight:600;">
+style="color:#60a5fa;text-decoration:none;">
 
 Daily Amader Shomoy
 
@@ -1179,35 +1187,35 @@ Contents
 
 </h3>
 
-<a href="#a1">01. Article Title</a>
-<a href="#a2">02. Article Title</a>
-<a href="#a3">03. Article Title</a>
-<a href="#a4">04. Article Title</a>
-<a href="#a5">05. Article Title</a>
-<a href="#a6">06. Article Title</a>
-<a href="#a7">07. Article Title</a>
-<a href="#a8">08. Article Title</a>
-<a href="#a9">09. Article Title</a>
-<a href="#a10">10. Article Title</a>
-<a href="#a11">11. Article Title</a>
-<a href="#a12">12. Article Title</a>
-<a href="#a13">13. Article Title</a>
-<a href="#a14">14. Article Title</a>
-<a href="#a15">15. Article Title</a>
-<a href="#a16">16. Article Title</a>
-<a href="#a17">17. Article Title</a>
-<a href="#a18">18. Article Title</a>
-<a href="#a19">19. Article Title</a>
-<a href="#a20">20. Article Title</a>
-<a href="#a21">21. Article Title</a>
-<a href="#a22">22. Article Title</a>
-<a href="#a23">23. Article Title</a>
-<a href="#a24">24. Article Title</a>
-<a href="#a25">25. Article Title</a>
-<a href="#a26">26. Article Title</a>
-<a href="#a27">27. Article Title</a>
-<a href="#a28">28. Article Title</a>
-<a href="#a29">29. Article Title</a>
+<a href="#a1">01. Article 01</a>
+<a href="#a2">02. Article 02</a>
+<a href="#a3">03. Article 03</a>
+<a href="#a4">04. Article 04</a>
+<a href="#a5">05. Article 05</a>
+<a href="#a6">06. Article 06</a>
+<a href="#a7">07. Article 07</a>
+<a href="#a8">08. Article 08</a>
+<a href="#a9">09. Article 09</a>
+<a href="#a10">10. Article 10</a>
+<a href="#a11">11. Article 11</a>
+<a href="#a12">12. Article 12</a>
+<a href="#a13">13. Article 13</a>
+<a href="#a14">14. Article 14</a>
+<a href="#a15">15. Article 15</a>
+<a href="#a16">16. Article 16</a>
+<a href="#a17">17. Article 17</a>
+<a href="#a18">18. Article 18</a>
+<a href="#a19">19. Article 19</a>
+<a href="#a20">20. Article 20</a>
+<a href="#a21">21. Article 21</a>
+<a href="#a22">22. Article 22</a>
+<a href="#a23">23. Article 23</a>
+<a href="#a24">24. Article 24</a>
+<a href="#a25">25. Article 25</a>
+<a href="#a26">26. Article 26</a>
+<a href="#a27">27. Article 27</a>
+<a href="#a28">28. Article 28</a>
+<a href="#a29">29. Article 29</a>
 
 </div>
 
@@ -1215,68 +1223,254 @@ Contents
 
 <div>
 
+<!-- ARTICLE 1-15 -->
+
 <div class="article-card" id="a1">
+<h2>Article 01</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-<span class="article-number">
+<div class="article-card" id="a2">
+<h2>Article 02</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-ARTICLE 01
+<div class="article-card" id="a3">
+<h2>Article 03</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-</span>
+<div class="article-card" id="a4">
+<h2>Article 04</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-<h2>
+<div class="article-card" id="a5">
+<h2>Article 05</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-Your Article Title
+<div class="article-card" id="a6">
+<h2>Article 06</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-</h2>
+<div class="article-card" id="a7">
+<h2>Article 07</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-<p>
+<div class="article-card" id="a8">
+<h2>Article 08</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-Paste your article here...
+<div class="article-card" id="a9">
+<h2>Article 09</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-</p>
+<div class="article-card" id="a10">
+<h2>Article 10</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-<a href="#" class="read-btn">
+<div class="article-card" id="a11">
+<h2>Article 11</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-Read At Newspaper
+<div class="article-card" id="a12">
+<h2>Article 12</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-</a>
+<div class="article-card" id="a13">
+<h2>Article 13</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
+<div class="article-card" id="a14">
+<h2>Article 14</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
+
+<div class="article-card" id="a15">
+<h2>Article 15</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
 </div>
 
 </div>
 
 <div>
 
+<!-- ARTICLE 16-29 -->
+
 <div class="article-card" id="a16">
+<h2>Article 16</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-<span class="article-number">
+<div class="article-card" id="a17">
+<h2>Article 17</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-ARTICLE 16
+<div class="article-card" id="a18">
+<h2>Article 18</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-</span>
+<div class="article-card" id="a19">
+<h2>Article 19</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-<h2>
+<div class="article-card" id="a20">
+<h2>Article 20</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-Your Article Title
+<div class="article-card" id="a21">
+<h2>Article 21</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-</h2>
+<div class="article-card" id="a22">
+<h2>Article 22</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-<p>
+<div class="article-card" id="a23">
+<h2>Article 23</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-Paste your article here...
+<div class="article-card" id="a24">
+<h2>Article 24</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-</p>
+<div class="article-card" id="a25">
+<h2>Article 25</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-<a href="#" class="read-btn">
+<div class="article-card" id="a26">
+<h2>Article 26</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-Read At Newspaper
+<div class="article-card" id="a27">
+<h2>Article 27</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
 
-</a>
+<div class="article-card" id="a28">
+<h2>Article 28</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
+
+<div class="article-card" id="a29">
+<h2>Article 29</h2>
+<p>Paste article here...</p>
+<a href="#" class="read-btn">Read At Newspaper</a>
+</div>
+
+</div>
 
 </div>
 
 </div>
 
+</div>
+
+<!-- REPORTS -->
+
+<div class="page" id="reports">
+
+<div class="page-banner">
+
+<img src="images/reports-banner.jpg">
+
+</div>
+
+<h1 class="section-title">
+
+Special News Reports
+
+</h1>
+
+<div class="grid">
+
+<div class="card">
+<h3>Special Report 01</h3>
+<p>Paste report summary here...</p>
+<a href="#" class="read-btn">Read Full Report</a>
+</div>
+
+<div class="card">
+<h3>Special Report 02</h3>
+<p>Paste report summary here...</p>
+<a href="#" class="read-btn">Read Full Report</a>
+</div>
+
+<div class="card">
+<h3>Special Report 03</h3>
+<p>Paste report summary here...</p>
+<a href="#" class="read-btn">Read Full Report</a>
+</div>
+
+<div class="card">
+<h3>Special Report 04</h3>
+<p>Paste report summary here...</p>
+<a href="#" class="read-btn">Read Full Report</a>
+</div>
+
+<div class="card">
+<h3>Special Report 05</h3>
+<p>Paste report summary here...</p>
+<a href="#" class="read-btn">Read Full Report</a>
+</div>
+
+<div class="card">
+<h3>Special Report 06</h3>
+<p>Paste report summary here...</p>
+<a href="#" class="read-btn">Read Full Report</a>
+</div>
+
+<div class="card">
+<h3>Special Report 07</h3>
+<p>Paste report summary here...</p>
+<a href="#" class="read-btn">Read Full Report</a>
 </div>
 
 </div>
@@ -1447,12 +1641,8 @@ Currently residing at Islamic University,
 Kushtia, Bangladesh.
 
 I am passionate about writing,
-education, journalism, research,
-leadership and social impact.
-
-I continuously try to contribute positively
-through creativity, teamwork
-and meaningful initiatives.
+education, journalism,
+research and leadership.
 
 </p>
 
@@ -1483,19 +1673,19 @@ All Rights Reserved.
 
 <a href="https://facebook.com/mdminhazur44rahman" target="_blank">
 
-<img src="images/facebook.png">
+Facebook
 
 </a>
 
 <a href="https://instagram.com/mdminhazurrahmanmahim" target="_blank">
 
-<img src="images/instagram.png">
+Instagram
 
 </a>
 
 <a href="https://linkedin.com/in/mdminhazur44rahman" target="_blank">
 
-<img src="images/linkedin.png">
+LinkedIn
 
 </a>
 

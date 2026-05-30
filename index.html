@@ -910,32 +910,48 @@ body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;fo
 const pages=['home','articles','reports','education','job','club','about'];
 const pageNames={home:'Home',articles:'Bengali Articles',reports:'Special News Reports',education:'Education',job:'Job Experience',club:'Clubbing Experience',about:'About Me'};
 
-function showPage(id,navEl){
+let currentPage='home';
+let readerOpen=false;
+
+function showPage(id,navEl,addHistory){
   if(!pages.includes(id))id='home';
+  if(currentPage===id&&!addHistory)return;
+  currentPage=id;
+
   const flash=document.getElementById('page-flash');
-  flash.classList.remove('flash-active');void flash.offsetWidth;flash.classList.add('flash-active');
+  flash.classList.remove('flash-active');
+  void flash.offsetWidth;
+  flash.classList.add('flash-active');
   setTimeout(()=>flash.classList.remove('flash-active'),1300);
+
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  if(navEl){navEl.classList.add('active');}
-  else{document.querySelectorAll('.nav-item').forEach(n=>{if(n.getAttribute('onclick')&&n.getAttribute('onclick').includes("'"+id+"'"))n.classList.add('active');});}
+
+  if(navEl){
+    navEl.classList.add('active');
+  } else {
+    document.querySelectorAll('.nav-item').forEach(n=>{
+      if(n.getAttribute('onclick')&&n.getAttribute('onclick').includes("'"+id+"'"))
+        n.classList.add('active');
+    });
+  }
+
   document.getElementById('topbar-title').textContent=pageNames[id]||id;
-  closeSidebar();window.scrollTo(0,0);
-  history.replaceState(null,'','#'+id);
+  closeSidebar();
+  window.scrollTo(0,0);
+
+  if(addHistory!==false){
+    history.pushState({page:id,reader:false},'','#'+id);
+  }
 }
 
 function loadFromHash(){
-  const hash=location.hash.replace('#','');
-  if(pages.includes(hash))showPage(hash,null);
-  else showPage('home',null);
+  const hash=location.hash.replace('#','').split('/')[0];
+  const id=pages.includes(hash)?hash:'home';
+  history.replaceState({page:id,reader:false},'','#'+id);
+  showPage(id,null,false);
 }
-
-window.addEventListener('hashchange',()=>{
-  const hash=location.hash.replace('#','');
-  if(!document.getElementById('article-reader').classList.contains('open'))
-    showPage(hash||'home',null);
-});
 
 function toggleTheme(){
   const html=document.documentElement;
@@ -944,8 +960,14 @@ function toggleTheme(){
   document.getElementById('theme-btn').textContent=isDark?'🌙':'☀️';
 }
 
-function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');}
-function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
 
 function filterWritings(gridId,inputId,countId,total){
   const q=document.getElementById(inputId).value.toLowerCase().trim();
@@ -971,33 +993,67 @@ function openReader(el){
   const link=el.getAttribute('data-link');
   const content=el.getAttribute('data-content')||'';
   const isRep=el.classList.contains('rep-theme');
+
   document.getElementById('reader-eyebrow').textContent=isRep?'Special Report '+num:'Article No. '+num;
   document.getElementById('reader-title-bn').textContent=bn;
   document.getElementById('reader-title-en').textContent=en;
   document.getElementById('reader-paper').textContent='📰 '+paper;
   document.getElementById('reader-date').textContent='📅 '+date;
+
   const area=document.getElementById('reader-content-area');
   if(content&&content.trim()!==''){
     area.innerHTML='<div class="reader-content">'+content+'</div>';
-  }else{
+  } else {
     area.innerHTML='<div class="reader-placeholder">✦ লেখাটি শীঘ্রই যোগ করা হবে ✦<br><br><small style="font-family:Rajdhani,sans-serif;font-size:14px;">HTML ফাইলে এই card-এর <code>data-content=""</code> এর ভেতরে সম্পূর্ণ লেখাটি paste করুন।</small></div>';
   }
+
   const extArea=document.getElementById('reader-ext-link');
-  if(link&&link!=='#'){extArea.innerHTML='<a href="'+link+'" target="_blank">পত্রিকায় পড়ুন → '+paper+' ↗</a>';}
-  else{extArea.innerHTML='';}
+  if(link&&link!=='#'){
+    extArea.innerHTML='<a href="'+link+'" target="_blank">পত্রিকায় পড়ুন → '+paper+' ↗</a>';
+  } else {
+    extArea.innerHTML='';
+  }
+
+  readerOpen=true;
   document.getElementById('article-reader').classList.add('open');
   document.body.style.overflow='hidden';
-  history.pushState(null,'',location.hash+'/article-'+num);
+  history.pushState({page:currentPage,reader:true,num:num},'','#'+currentPage+'/article-'+num);
 }
 
 function closeReader(){
+  readerOpen=false;
   document.getElementById('article-reader').classList.remove('open');
   document.body.style.overflow='';
-  history.back();
 }
 
-window.addEventListener('popstate',()=>{
-  if(document.getElementById('article-reader').classList.contains('open'))closeReader();
+window.addEventListener('popstate',function(e){
+  const state=e.state;
+
+  if(!state){
+    // no state মানে website-এর বাইরে যাওয়া উচিত না, home-এ ফিরে যাও
+    if(readerOpen){
+      closeReader();
+    } else {
+      history.pushState({page:'home',reader:false},'','#home');
+      showPage('home',null,false);
+    }
+    return;
+  }
+
+  if(state.reader===true){
+    // reader state-এ আসা মানে reader open করার কথা — এটা সাধারণত forward-এ হয়, ignore করো
+    return;
+  }
+
+  if(state.reader===false){
+    // reader বন্ধ করো যদি open থাকে
+    if(readerOpen){
+      closeReader();
+    } else {
+      // সাধারণ page navigation
+      showPage(state.page,null,false);
+    }
+  }
 });
 
 function drawDNA(){
@@ -1046,7 +1102,13 @@ function initNetworkNodes(){
   for(let i=0;i<20;i++){const n=document.createElement('div');n.style.cssText='position:absolute;left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;width:5px;height:5px;border-radius:50%;background:rgba(147,51,234,.5);box-shadow:0 0 8px rgba(147,51,234,.4);animation:nodeBreath '+(2+Math.random()*2)+'s '+(Math.random()*2)+'s ease-in-out infinite alternate;';c.appendChild(n);}
 }
 
-window.addEventListener('load',()=>{drawDNA();initDataStreams();initInkLines();initNetworkNodes();loadFromHash();});
+window.addEventListener('load',()=>{
+  drawDNA();
+  initDataStreams();
+  initInkLines();
+  initNetworkNodes();
+  loadFromHash();
+});
 </script>
 </body>
 </html>

@@ -1,1726 +1,2142 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-theme="dark">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Md. Minhazur Rahman Mahim</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;500;700;900&family=Noto+Sans+Bengali:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-scroll-behavior:smooth;
+/* ══════════════════════════════════════════
+   ROOT VARIABLES
+══════════════════════════════════════════ */
+:root {
+  --bg: #020408;
+  --bg2: #060d14;
+  --bg3: #0a1520;
+  --surface: rgba(0,220,255,0.04);
+  --border: rgba(0,220,255,0.12);
+  --border2: rgba(0,220,255,0.25);
+  --text: #e0f4ff;
+  --text2: #7ab8d4;
+  --text3: #3a6a80;
+  --accent: #00dcff;
+  --accent2: #00ff9d;
+  --accent3: #ff6b35;
+  --warn: #ff3d71;
+  --glow: 0 0 30px rgba(0,220,255,0.15);
+  --glow2: 0 0 60px rgba(0,220,255,0.08);
+  --sidebar-w: 260px;
+  --r: 16px;
+}
+
+[data-theme="light"] {
+  --bg: #f0f8ff;
+  --bg2: #e4f1fa;
+  --bg3: #d6eaf7;
+  --surface: rgba(0,100,180,0.06);
+  --border: rgba(0,100,180,0.18);
+  --border2: rgba(0,100,180,0.35);
+  --text: #0a1f2e;
+  --text2: #1a4a6e;
+  --text3: #4a7a9e;
+  --accent: #006eb8;
+  --accent2: #00875a;
+  --accent3: #c84a00;
+  --warn: #c0002a;
+  --glow: 0 0 30px rgba(0,110,184,0.12);
+  --glow2: 0 0 60px rgba(0,110,184,0.06);
+}
+
+/* ══════════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.5s, color 0.5s;
+}
+
+/* ══════════════════════════════════════════
+   GLOBAL CANVAS BG (stars/grid per theme)
+══════════════════════════════════════════ */
+#global-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Scanlines overlay */
+#global-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,220,255,0.015) 2px,
+    rgba(0,220,255,0.015) 4px
+  );
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════
+   PAGE INTRO FLASH
+══════════════════════════════════════════ */
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+  animation: introFade 3.2s forwards;
+}
+
+#intro .intro-photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 60px rgba(0,220,255,0.5), 0 0 120px rgba(0,220,255,0.2);
+  animation: introPhoto 3s ease forwards;
+}
+
+#intro .intro-name {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(16px, 3vw, 28px);
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-top: 24px;
+  animation: introText 3s ease forwards;
+  text-shadow: 0 0 20px var(--accent);
+}
+
+#intro .intro-line {
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  margin-top: 16px;
+  animation: introLine 2.5s 0.3s ease forwards;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+@keyframes introPhoto {
+  0%   { opacity: 0; transform: scale(0.3) rotate(-20deg); filter: blur(20px); }
+  50%  { opacity: 1; transform: scale(1.05); filter: blur(0); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes introText {
+  0%   { opacity: 0; letter-spacing: 20px; }
+  60%  { opacity: 1; letter-spacing: 4px; }
+  100% { opacity: 1; }
+}
+@keyframes introLine {
+  to { width: 280px; }
+}
+@keyframes introFade {
+  0%   { opacity: 1; visibility: visible; }
+  80%  { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
+/* ══════════════════════════════════════════
+   PAGE TRANSITION PHOTO FLASH
+══════════════════════════════════════════ */
+#page-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 8000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+}
+
+#page-flash img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 60px var(--accent), 0 0 120px rgba(0,220,255,0.3);
+}
+
+#page-flash.flash-active {
+  animation: pageFlash 1.2s ease forwards;
+}
+
+@keyframes pageFlash {
+  0%   { opacity: 0; }
+  15%  { opacity: 1; }
+  70%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ══════════════════════════════════════════
+   SIDEBAR
+══════════════════════════════════════════ */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  transition: transform 0.35s cubic-bezier(.4,0,.2,1), background 0.5s;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* corner accent */
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+}
+
+.sidebar-profile {
+  padding: 36px 20px 24px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.avatar-hex {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 16px;
+  position: relative;
+}
+.avatar-hex img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: var(--glow);
+  display: block;
+}
+.avatar-hex::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  opacity: 0.3;
+  animation: avatarPulse 2.5s ease-in-out infinite;
+}
+@keyframes avatarPulse {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.1); opacity: 0.08; }
+}
+
+.sidebar-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.sidebar-role {
+  font-size: 11px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.sidebar-nav {
+  padding: 16px 0;
+  flex: 1;
+}
+
+.nav-label {
+  font-size: 9px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  padding: 10px 20px 4px;
+  font-family: 'Orbitron', monospace;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.nav-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0;
+  background: linear-gradient(90deg, rgba(0,220,255,0.08), transparent);
+  transition: width 0.3s;
+}
+.nav-item:hover::before,
+.nav-item.active::before {
+  width: 100%;
+}
+.nav-item:hover,
+.nav-item.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+
+.nav-icon { font-size: 16px; width: 22px; text-align: center; flex-shrink: 0; }
+
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+}
+.sidebar-socials {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 8px;
+}
+.soc-btn {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  transition: all 0.25s;
+}
+.soc-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 12px rgba(0,220,255,0.2);
+  transform: translateY(-2px);
+}
+
+/* ══════════════════════════════════════════
+   MAIN AREA
+══════════════════════════════════════════ */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* ══════════════════════════════════════════
+   TOPBAR
+══════════════════════════════════════════ */
+.topbar {
+  position: sticky;
+  top: 0;
+  height: 52px;
+  background: rgba(2,4,8,0.85);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 36px;
+  z-index: 500;
+  transition: background 0.5s;
+}
+[data-theme="light"] .topbar {
+  background: rgba(240,248,255,0.85);
+}
+
+.topbar-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.topbar-right { display: flex; gap: 10px; align-items: center; }
+
+.tb-btn {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  transition: all 0.25s;
+}
+.tb-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 10px rgba(0,220,255,0.15);
+}
+
+.hamburger { display: none; }
+
+/* ══════════════════════════════════════════
+   PAGES
+══════════════════════════════════════════ */
+.page {
+  display: none;
+  min-height: calc(100vh - 52px);
+  position: relative;
+  overflow: hidden;
+}
+.page.active { display: block; animation: pageFade 0.5s ease; }
+@keyframes pageFade {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ══════════════════════════════════════════
+   PAGE BACKGROUNDS (animated per section)
+══════════════════════════════════════════ */
+
+#home .page-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+#home .page-bg canvas { width: 100%; height: 100%; }
+
+#articles .page-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 80% 50%, rgba(255,107,53,0.06) 0%, transparent 60%);
+}
+
+#reports .page-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 20% 60%, rgba(255,61,113,0.06) 0%, transparent 60%);
+}
+
+#education .page-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 0%, rgba(0,255,157,0.06) 0%, transparent 60%);
+}
+
+#job .page-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 90% 80%, rgba(0,220,255,0.06) 0%, transparent 60%);
+}
+
+#club .page-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 10% 80%, rgba(147,51,234,0.06) 0%, transparent 60%);
+}
+
+#about .page-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 70% 30%, rgba(0,220,255,0.05) 0%, transparent 60%);
+}
+
+.page-inner {
+  position: relative;
+  z-index: 1;
+  padding: 48px 40px;
+  max-width: 1100px;
+}
+
+/* ══════════════════════════════════════════
+   SECTION HEADINGS
+══════════════════════════════════════════ */
+.section-eyebrow {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(24px, 4vw, 38px);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.section-line {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin-bottom: 40px;
+}
+
+/* ══════════════════════════════════════════
+   HOME PAGE
+══════════════════════════════════════════ */
+.hero {
+  min-height: calc(100vh - 52px);
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  align-items: center;
+  gap: 60px;
+  padding: 48px 40px;
+  position: relative;
+}
+
+.hero-left { position: relative; z-index: 1; }
+
+.hero-greeting {
+  font-family: 'Orbitron', monospace;
+  font-size: 11px;
+  color: var(--accent2);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-greeting::before {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--accent2);
+}
+
+.hero-name {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(28px, 4.5vw, 54px);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.05;
+  margin-bottom: 8px;
+}
+.hero-name span {
+  color: var(--accent);
+  text-shadow: 0 0 30px rgba(0,220,255,0.4);
+}
+
+.hero-sub {
+  font-size: 16px;
+  color: var(--text2);
+  margin-bottom: 28px;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.role-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.role-pill {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 12px;
+  color: var(--text2);
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 0.5px;
+  transition: all 0.25s;
+}
+.role-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.hero-bio {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.8;
+  max-width: 520px;
+  margin-bottom: 36px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 36px;
+  margin-bottom: 40px;
+}
+.stat-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(0,220,255,0.3);
+}
+.stat-label {
+  font-size: 10px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 4px;
+  font-family: 'Orbitron', monospace;
+}
+
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn {
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-family: 'Orbitron', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #020408;
+  box-shadow: 0 0 20px rgba(0,220,255,0.3);
+}
+.btn-primary:hover {
+  background: #33e5ff;
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(0,220,255,0.5);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border2);
+}
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.hero-right {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--glow);
+}
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+  animation: scanLine 3s ease-in-out infinite;
+}
+@keyframes scanLine {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.hero-card-photo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 40px rgba(0,220,255,0.3);
+  margin: 0 auto 20px;
+  display: block;
+}
+
+.hero-card-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.hero-card-role {
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.currently-box {
+  text-align: left;
+  background: rgba(0,220,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+.currently-label {
+  font-family: 'Orbitron', monospace;
+  font-size: 9px;
+  color: var(--accent2);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.cur-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text2);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.cur-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  margin-top: 5px;
+  box-shadow: 0 0 6px var(--accent);
+}
+
+/* ══════════════════════════════════════════
+   ARTICLES PAGE
+══════════════════════════════════════════ */
+.articles-search {
+  margin-bottom: 28px;
+}
+.search-wrap {
+  position: relative;
+  max-width: 500px;
+}
+.search-wrap input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 18px 12px 44px;
+  color: var(--text);
+  font-size: 14px;
+  font-family: 'Rajdhani', sans-serif;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.search-wrap input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0,220,255,0.08);
+}
+.search-wrap input::placeholder { color: var(--text3); }
+.search-icon {
+  position: absolute;
+  left: 14px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text3);
+  font-size: 16px;
+  pointer-events: none;
+}
+.articles-count {
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 8px;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 1px;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.article-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 24px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.article-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 0;
+  background: linear-gradient(180deg, var(--accent3), var(--accent));
+  transition: height 0.3s;
+}
+.article-card:hover {
+  border-color: var(--accent3);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(255,107,53,0.08);
+}
+.article-card:hover::before { height: 100%; }
+
+.article-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  color: var(--accent3);
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+.article-paper {
+  font-size: 10px;
+  color: var(--text3);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.article-title-bn {
+  font-family: 'Noto Sans Bengali', sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  font-weight: 600;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+.article-read-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--accent3);
+  text-decoration: none;
+  font-weight: 700;
+  border: 1px solid rgba(255,107,53,0.3);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+  background: rgba(255,107,53,0.06);
+}
+.article-read-btn:hover {
+  background: var(--accent3);
+  color: #020408;
+  border-color: var(--accent3);
+}
+
+/* ══════════════════════════════════════════
+   REPORTS PAGE
+══════════════════════════════════════════ */
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+.report-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 28px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.report-card:hover {
+  border-color: var(--warn);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(255,61,113,0.08);
+}
+.report-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  color: var(--warn);
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.report-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+  font-family: 'Orbitron', monospace;
+}
+.report-desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.report-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--warn);
+  text-decoration: none;
+  border: 1px solid rgba(255,61,113,0.3);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-family: 'Orbitron', monospace;
+  background: rgba(255,61,113,0.06);
+  transition: all 0.2s;
+}
+.report-btn:hover {
+  background: var(--warn);
+  color: #fff;
+}
+
+/* ══════════════════════════════════════════
+   EDUCATION PAGE
+══════════════════════════════════════════ */
+.edu-timeline {
+  position: relative;
+  padding-left: 20px;
+}
+.edu-timeline::before {
+  content: '';
+  position: absolute;
+  left: 28px; top: 8px; bottom: 8px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--accent), var(--accent2), transparent);
+}
+
+.edu-item {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 44px;
+  position: relative;
+  animation: eduSlide 0.6s ease both;
+}
+.edu-item:nth-child(1) { animation-delay: 0.1s; }
+.edu-item:nth-child(2) { animation-delay: 0.2s; }
+.edu-item:nth-child(3) { animation-delay: 0.3s; }
+@keyframes eduSlide {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.edu-node {
+  flex-shrink: 0;
+  width: 58px; height: 58px;
+  border-radius: 14px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  position: relative;
+  z-index: 1;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.edu-item:hover .edu-node {
+  border-color: var(--accent2);
+  box-shadow: 0 0 20px rgba(0,255,157,0.15);
+}
+
+.edu-content {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 24px;
+  transition: border-color 0.3s;
+}
+.edu-item:hover .edu-content { border-color: var(--accent2); }
+
+.edu-period {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  color: var(--accent2);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.edu-degree {
+  font-family: 'Orbitron', monospace;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.edu-inst {
+  font-size: 14px;
+  color: var(--text2);
+  margin-bottom: 6px;
+}
+.edu-note {
+  font-size: 12px;
+  color: var(--text3);
+  margin-bottom: 12px;
+}
+.edu-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.edu-badge {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px 12px;
+  font-size: 11px;
+  color: var(--text2);
+  font-family: 'Orbitron', monospace;
+}
+.edu-badge.gold {
+  border-color: rgba(0,255,157,0.35);
+  color: var(--accent2);
+}
+
+/* ══════════════════════════════════════════
+   JOB & CLUB EXPERIENCE
+══════════════════════════════════════════ */
+.exp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.exp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 24px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.exp-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.exp-card:hover {
+  border-color: var(--border2);
+  transform: translateY(-4px);
+  box-shadow: var(--glow);
+}
+.exp-card:hover::after { opacity: 1; }
+
+.exp-logo {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+.exp-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 11px; }
+
+.exp-org {
+  font-family: 'Orbitron', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.exp-role {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.exp-period {
+  font-size: 11px;
+  color: var(--text3);
+  font-family: 'Orbitron', monospace;
+  margin-bottom: 4px;
+}
+
+.exp-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-family: 'Orbitron', monospace;
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+}
+.exp-status.current {
+  background: rgba(0,220,255,0.08);
+  color: var(--accent);
+  border: 1px solid rgba(0,220,255,0.25);
+}
+.exp-status.former {
+  background: var(--surface);
+  color: var(--text3);
+  border: 1px solid var(--border);
+}
+.status-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.exp-status.current .status-dot {
+  animation: blink 1.5s ease-in-out infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* ══════════════════════════════════════════
+   ABOUT PAGE
+══════════════════════════════════════════ */
+.about-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 44px;
+  align-items: start;
+}
+
+.about-photo-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  overflow: hidden;
+  position: sticky;
+  top: 72px;
+  box-shadow: var(--glow);
+}
+.about-photo-card img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+}
+.about-photo-label {
+  padding: 16px;
+  text-align: center;
+  font-family: 'Orbitron', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 2px;
+  border-top: 1px solid var(--border);
+}
+
+.about-bio {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.85;
+  margin-bottom: 20px;
+}
+
+.about-section-label {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 28px 0 14px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text2);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.contact-icon { color: var(--accent2); width: 20px; text-align: center; }
+.contact-link { color: var(--accent); text-decoration: none; }
+.contact-link:hover { text-decoration: underline; }
+
+.skills-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.skill-tag {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 12px;
+  color: var(--text2);
+  font-family: 'Orbitron', monospace;
+  transition: all 0.2s;
+}
+.skill-tag:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+.page-footer {
+  margin-top: 80px;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--text3);
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 0.5px;
+}
+.footer-socials { display: flex; gap: 16px; }
+.footer-soc { color: var(--text3); text-decoration: none; transition: color 0.2s; }
+.footer-soc:hover { color: var(--accent); }
+
+/* ══════════════════════════════════════════
+   SIDEBAR OVERLAY
+══════════════════════════════════════════ */
+.sidebar-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 999;
+  backdrop-filter: blur(4px);
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 960px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .hamburger { display: flex; }
+  .sidebar-overlay.show { display: block; }
+  .hero { grid-template-columns: 1fr; padding: 36px 24px; }
+  .hero-right { display: none; }
+  .page-inner { padding: 36px 24px; }
+  .topbar { padding: 0 20px; }
+  .about-layout { grid-template-columns: 1fr; }
+  .about-photo-card { position: relative; top: auto; max-width: 280px; }
+}
+
+@media (max-width: 600px) {
+  .articles-grid { grid-template-columns: 1fr; }
+  .exp-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 20px; }
+  .section-title { font-size: 22px; }
+}
+
+/* ══════════════════════════════════════════
+   SCROLLBAR
+══════════════════════════════════════════ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ══════════════════════════════════════════
+   BG ELEMENTS
+══════════════════════════════════════════ */
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.3;
+}
+
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: orbFloat 8s ease-in-out infinite;
+}
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0,0); }
+  33% { transform: translate(20px,-30px); }
+  66% { transform: translate(-15px,20px); }
+}
+
+@keyframes inkDraw {
+  0% { opacity: 0; width: 0; }
+  20% { opacity: 0.3; }
+  80% { opacity: 0.2; }
+  100% { opacity: 0; width: 80%; }
+}
+
+@keyframes nodeBreath {
+  from { opacity: 0.2; transform: scale(0.8); }
+  to   { opacity: 0.7; transform: scale(1.3); }
+}
+
+@keyframes streamFlow {
+  from { top: -100%; }
+  to   { top: 200%; }
 }
-
-:root{
-
---bg:#050816;
---card:rgba(255,255,255,.06);
---glass:rgba(255,255,255,.08);
-
---text:#ffffff;
---muted:#b5b5c3;
-
---border:rgba(255,255,255,.08);
-
---primary:#7c3aed;
---secondary:#06b6d4;
---third:#3b82f6;
-
-}
-
-body.light{
-
---bg:#eef2ff;
---card:rgba(255,255,255,.75);
---glass:rgba(255,255,255,.75);
-
---text:#111827;
---muted:#475569;
-
---border:rgba(0,0,0,.08);
-
-}
-
-body{
-
-background:var(--bg);
-color:var(--text);
-
-font-family:'Inter',sans-serif;
-
-overflow-x:hidden;
-
-transition:.4s;
-
-}
-
-body::before{
-
-content:'';
-
-position:fixed;
-
-width:700px;
-height:700px;
-
-background:
-radial-gradient(circle,var(--primary),transparent 70%);
-
-top:-250px;
-left:-250px;
-
-filter:blur(130px);
-
-opacity:.35;
-
-z-index:-1;
-
-}
-
-body::after{
-
-content:'';
-
-position:fixed;
-
-width:700px;
-height:700px;
-
-background:
-radial-gradient(circle,var(--secondary),transparent 70%);
-
-bottom:-250px;
-right:-250px;
-
-filter:blur(130px);
-
-opacity:.28;
-
-z-index:-1;
-
-}
-
-/* INTRO */
-
-.page-intro{
-
-position:fixed;
-inset:0;
-
-background:#050816;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-z-index:999999;
-
-animation:introHide 3s forwards;
-
-}
-
-.page-intro img{
-
-width:230px;
-height:230px;
-
-border-radius:50%;
-
-object-fit:cover;
-
-border:5px solid rgba(255,255,255,.15);
-
-box-shadow:
-0 0 60px rgba(124,58,237,.55),
-0 0 120px rgba(6,182,212,.35);
-
-animation:introZoom 2.5s ease;
-
-}
-
-@keyframes introZoom{
-
-0%{
-opacity:0;
-transform:scale(.3) rotate(-15deg);
-}
-
-60%{
-opacity:1;
-transform:scale(1.1);
-}
-
-100%{
-opacity:1;
-transform:scale(1);
-}
-
-}
-
-@keyframes introHide{
-
-0%{
-opacity:1;
-visibility:visible;
-}
-
-85%{
-opacity:1;
-}
-
-100%{
-opacity:0;
-visibility:hidden;
-}
-
-}
-
-/* BUTTONS */
-
-.menu-btn{
-
-position:fixed;
-
-top:20px;
-left:20px;
-
-width:58px;
-height:58px;
-
-border:none;
-
-border-radius:18px;
-
-background:
-linear-gradient(
-135deg,
-var(--primary),
-var(--secondary));
-
-color:white;
-
-font-size:22px;
-
-cursor:pointer;
-
-z-index:999999;
-
-}
-
-.theme-switch{
-
-position:fixed;
-
-top:20px;
-right:20px;
-
-width:60px;
-height:60px;
-
-border:none;
-
-border-radius:18px;
-
-background:
-linear-gradient(
-135deg,
-#0f172a,
-#1e293b);
-
-color:white;
-
-font-size:22px;
-
-cursor:pointer;
-
-z-index:999999;
-
-}
-
-/* SIDEBAR */
-
-.sidebar{
-
-position:fixed;
-
-top:20px;
-left:-350px;
-
-width:320px;
-height:calc(100vh - 40px);
-
-background:var(--glass);
-
-border:1px solid var(--border);
-
-backdrop-filter:blur(25px);
-
-border-radius:35px;
-
-padding:28px;
-
-overflow:auto;
-
-z-index:99999;
-
-transition:.45s;
-
-}
-
-.sidebar.show{
-
-left:20px;
-
-}
-
-.profile{
-
-text-align:center;
-
-margin-bottom:35px;
-
-}
-
-.profile img{
-
-width:125px;
-height:125px;
-
-border-radius:50%;
-
-object-fit:cover;
-
-border:3px solid rgba(255,255,255,.15);
-
-}
-
-.profile h2{
-
-margin-top:18px;
-
-font-size:26px;
-
-font-family:'Syne',sans-serif;
-
-}
-
-.profile p{
-
-margin-top:8px;
-
-color:var(--muted);
-
-}
-
-.nav{
-
-display:flex;
-flex-direction:column;
-gap:12px;
-
-}
-
-.nav a{
-
-text-decoration:none;
-color:var(--text);
-
-padding:15px 18px;
-
-border-radius:18px;
-
-transition:.3s;
-
-}
-
-.nav a:hover{
-
-background:rgba(255,255,255,.07);
-
-transform:translateX(6px);
-
-}
-
-.menu-title{
-
-margin-top:20px;
-
-margin-bottom:8px;
-
-color:var(--muted);
-
-font-size:13px;
-
-letter-spacing:2px;
-
-text-transform:uppercase;
-
-padding-left:10px;
-
-}
-
-.sub-menu{
-
-display:flex;
-flex-direction:column;
-gap:10px;
-
-margin-left:15px;
-
-}
-
-/* MAIN */
-
-.main{
-
-padding:40px;
-
-}
-
-/* PAGE */
-
-.page{
-
-display:none;
-
-position:relative;
-
-border-radius:40px;
-
-padding:40px;
-
-min-height:100vh;
-
-animation:fade .5s ease;
-
-}
-
-.page.active{
-
-display:block;
-
-}
-
-@keyframes fade{
-
-from{
-opacity:0;
-transform:translateY(20px);
-}
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-/* PAGE THEMES */
-
-#home{
-
-background:
-linear-gradient(rgba(5,8,22,.82),rgba(5,8,22,.82)),
-url('images/home-bg.jpg');
-
-background-size:cover;
-background-position:center;
-
-}
-
-#articles{
-
-background:
-linear-gradient(rgba(25,12,5,.85),rgba(25,12,5,.85)),
-url('images/articles-bg.jpg');
-
-background-size:cover;
-background-position:center;
-
-}
-
-#reports{
-
-background:
-linear-gradient(rgba(5,10,25,.84),rgba(5,10,25,.84)),
-url('images/reports-bg.jpg');
-
-background-size:cover;
-background-position:center;
-
-}
-
-#education{
-
-background:
-linear-gradient(rgba(5,20,15,.84),rgba(5,20,15,.84)),
-url('images/education-bg.jpg');
-
-background-size:cover;
-background-position:center;
-
-}
-
-#job{
-
-background:
-linear-gradient(rgba(18,10,5,.84),rgba(18,10,5,.84)),
-url('images/job-bg.jpg');
-
-background-size:cover;
-background-position:center;
-
-}
-
-#club{
-
-background:
-linear-gradient(rgba(18,5,20,.84),rgba(18,5,20,.84)),
-url('images/club-bg.jpg');
-
-background-size:cover;
-background-position:center;
-
-}
-
-#about{
-
-background:
-linear-gradient(rgba(5,10,20,.84),rgba(5,10,20,.84)),
-url('images/about-bg.jpg');
-
-background-size:cover;
-background-position:center;
-
-}
-
-/* MINI PROFILE */
-
-.page-mini-profile{
-
-position:fixed;
-
-top:20px;
-left:95px;
-
-display:flex;
-
-align-items:center;
-
-gap:14px;
-
-background:rgba(255,255,255,.08);
-
-backdrop-filter:blur(18px);
-
-padding:12px 18px;
-
-border-radius:60px;
-
-border:1px solid rgba(255,255,255,.08);
-
-z-index:999999;
-
-transition:.4s;
-
-}
-
-.page-mini-profile img{
-
-width:52px;
-height:52px;
-
-border-radius:50%;
-
-object-fit:cover;
-
-}
-
-.page-mini-profile-text{
-
-display:flex;
-flex-direction:column;
-
-}
-
-.page-mini-profile-text h4{
-
-font-size:14px;
-
-line-height:1.4;
-
-}
-
-.page-mini-profile-text span{
-
-font-size:12px;
-
-margin-top:2px;
-
-opacity:0;
-
-max-height:0;
-
-overflow:hidden;
-
-transition:.4s;
-
-color:#cbd5e1;
-
-}
-
-.page-mini-profile.scrolled span{
-
-opacity:1;
-
-max-height:30px;
-
-}
-
-/* PAGE BANNER */
-
-.page-banner{
-
-width:100%;
-height:320px;
-
-overflow:hidden;
-
-border-radius:35px;
-
-margin-bottom:40px;
-
-}
-
-.page-banner img{
-
-width:100%;
-height:100%;
-
-object-fit:cover;
-
-animation:bannerZoom 10s ease infinite alternate;
-
-}
-
-@keyframes bannerZoom{
-
-from{
-transform:scale(1);
-}
-
-to{
-transform:scale(1.12);
-}
-
-}
-
-/* TITLES */
-
-.section-title{
-
-font-size:58px;
-
-margin-bottom:35px;
-
-font-family:'Syne',sans-serif;
-
-}
-
-/* HERO */
-
-.hero{
-
-display:flex;
-
-align-items:center;
-justify-content:center;
-
-gap:60px;
-
-flex-wrap:wrap;
-
-}
-
-.hero-img img{
-
-width:380px;
-
-border-radius:35px;
-
-}
-
-.hero-content{
-
-flex:1;
-
-max-width:750px;
-
-}
-
-.hero-content h1{
-
-font-size:74px;
-
-line-height:1.1;
-
-font-family:'Syne',sans-serif;
-
-margin-bottom:25px;
-
-}
-
-.gradient{
-
-background:
-linear-gradient(
-90deg,
-#7c3aed,
-#06b6d4,
-#3b82f6);
-
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-
-}
-
-.hero-content p{
-
-line-height:2;
-
-font-size:18px;
-
-}
-
-.current-box{
-
-margin-top:35px;
-
-background:rgba(255,255,255,.05);
-
-border:1px solid var(--border);
-
-padding:30px;
-
-border-radius:28px;
-
-line-height:2;
-
-}
-
-/* ARTICLES */
-
-.article-layout{
-
-display:grid;
-
-grid-template-columns:320px 1fr;
-
-gap:30px;
-
-}
-
-.article-sidebar{
-
-position:sticky;
-
-top:20px;
-
-height:calc(100vh - 40px);
-
-overflow:auto;
-
-background:var(--card);
-
-border:1px solid var(--border);
-
-border-radius:30px;
-
-padding:25px;
-
-}
-
-.article-sidebar h3{
-
-margin-bottom:20px;
-
-font-size:28px;
-
-font-family:'Syne',sans-serif;
-
-}
-
-.article-sidebar a{
-
-display:block;
-
-text-decoration:none;
-
-color:var(--text);
-
-margin-bottom:10px;
-
-padding:12px;
-
-border-radius:14px;
-
-}
-
-.article-sidebar a:hover{
-
-background:rgba(255,255,255,.07);
-
-}
-
-.article-wrapper{
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:30px;
-
-}
-
-.article-card{
-
-background:var(--card);
-
-border:1px solid var(--border);
-
-border-radius:35px;
-
-padding:35px;
-
-margin-bottom:30px;
-
-}
-
-.article-card h2{
-
-margin-bottom:15px;
-
-font-size:30px;
-
-font-family:'Syne',sans-serif;
-
-}
-
-.article-card p{
-
-line-height:2;
-
-margin-bottom:20px;
-
-}
-
-.read-btn{
-
-display:inline-block;
-
-padding:14px 24px;
-
-border-radius:16px;
-
-text-decoration:none;
-
-color:white;
-
-background:
-linear-gradient(
-135deg,
-var(--primary),
-var(--third));
-
-}
-
-/* GRID */
-
-.grid{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-
-gap:25px;
-
-}
-
-.card{
-
-background:var(--card);
-
-border:1px solid var(--border);
-
-border-radius:30px;
-
-padding:30px;
-
-}
-
-.card img{
-
-width:75px;
-height:75px;
-
-object-fit:contain;
-
-margin-bottom:20px;
-
-}
-
-.card h3{
-
-font-size:26px;
-
-margin-bottom:10px;
-
-font-family:'Syne',sans-serif;
-
-}
-
-/* ABOUT */
-
-.about-box{
-
-background:var(--card);
-
-border:1px solid var(--border);
-
-border-radius:35px;
-
-padding:40px;
-
-line-height:2.2;
-
-}
-
-.email-box{
-
-display:inline-block;
-
-margin-top:25px;
-
-padding:15px 24px;
-
-border-radius:18px;
-
-background:
-linear-gradient(
-135deg,
-var(--primary),
-var(--secondary));
-
-text-decoration:none;
-
-color:white;
-
-}
-
-/* FOOTER */
-
-footer{
-
-text-align:center;
-
-padding:60px 20px;
-
-}
-
-.socials{
-
-display:flex;
-
-justify-content:center;
-
-gap:20px;
-
-flex-wrap:wrap;
-
-margin-top:25px;
-
-}
-
-.socials a{
-
-text-decoration:none;
-
-color:white;
-
-padding:14px 24px;
-
-border-radius:18px;
-
-background:
-linear-gradient(
-135deg,
-var(--primary),
-var(--third));
-
-}
-
-/* MOBILE */
-
-@media(max-width:1100px){
-
-.article-layout{
-grid-template-columns:1fr;
-}
-
-.article-sidebar{
-position:relative;
-height:auto;
-}
-
-}
-
-@media(max-width:900px){
-
-.main{
-padding:20px;
-padding-top:100px;
-}
-
-.hero{
-flex-direction:column;
-text-align:center;
-}
-
-.hero-img img{
-width:100%;
-max-width:340px;
-}
-
-.hero-content h1{
-font-size:48px;
-}
-
-.section-title{
-font-size:42px;
-}
-
-.article-wrapper{
-grid-template-columns:1fr;
-}
-
-/* FIXED MINI PROFILE */
-
-.page-mini-profile{
-
-top:20px;
-left:88px;
-
-padding:8px 12px;
-
-border-radius:50px;
-
-gap:10px;
-
-}
-
-.page-mini-profile img{
-
-width:40px;
-height:40px;
-
-}
-
-.page-mini-profile-text h4{
-
-font-size:11px;
-line-height:1.2;
-
-}
-
-.page-mini-profile-text span{
-
-font-size:9px;
-
-}
-
-}
-
-
-.search-box{
-width:100%;
-padding:14px;
-border-radius:15px;
-border:none;
-outline:none;
-margin-bottom:20px;
-background:rgba(255,255,255,.08);
-color:white;
-}
-.hero-stats{display:flex;gap:20px;flex-wrap:wrap;margin-top:25px}
-.hero-stats .stat{background:rgba(255,255,255,.05);padding:18px;border-radius:18px;min-width:120px;text-align:center}
-.status{display:inline-block;padding:6px 12px;border-radius:20px;font-size:12px}
-.current{background:#064e3b;color:#6ee7b7}
-.former{background:#3f3f46;color:#d4d4d8}
 
 </style>
-
 </head>
-
 <body>
 
-<!-- INTRO -->
-
-<div class="page-intro">
-
-<img src="images/profile.jpg">
-
+<!-- PAGE INTRO -->
+<div id="intro">
+  <img src="images/profile.jpg" alt="Minhaz" class="intro-photo">
+  <div class="intro-name">Minhazur Rahman Mahim</div>
+  <div class="intro-line"></div>
 </div>
 
-<!-- BUTTONS -->
+<!-- PAGE FLASH -->
+<div id="page-flash">
+  <img src="images/profile.jpg" alt="">
+</div>
 
-<button class="menu-btn" onclick="toggleMenu()">
-
-☰
-
-</button>
-
-<button class="theme-switch" onclick="toggleTheme()">
-
-🌙
-
-</button>
+<!-- SIDEBAR OVERLAY -->
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
 
 <!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-profile">
+    <div class="avatar-hex">
+      <img src="images/profile.jpg" alt="Minhaz">
+    </div>
+    <div class="sidebar-name">Md. Minhazur<br>Rahman Mahim</div>
+    <div class="sidebar-role">BME · Journalist</div>
+  </div>
 
-<div class="sidebar" id="sidebar">
+  <div class="sidebar-nav">
+    <div class="nav-label">Navigate</div>
+    <a class="nav-item active" onclick="showPage('home',this)">
+      <span class="nav-icon">⬡</span> Home
+    </a>
 
-<div class="profile">
+    <div class="nav-label" style="margin-top:8px">Writings</div>
+    <a class="nav-item" onclick="showPage('articles',this)">
+      <span class="nav-icon">✦</span> Bengali Articles
+    </a>
+    <a class="nav-item" onclick="showPage('reports',this)">
+      <span class="nav-icon">◈</span> Special News Reports
+    </a>
 
-<img src="images/profile.jpg">
+    <div class="nav-label" style="margin-top:8px">Profile</div>
+    <a class="nav-item" onclick="showPage('education',this)">
+      <span class="nav-icon">◇</span> Education
+    </a>
+    <a class="nav-item" onclick="showPage('job',this)">
+      <span class="nav-icon">◆</span> Job Experience
+    </a>
+    <a class="nav-item" onclick="showPage('club',this)">
+      <span class="nav-icon">⬡</span> Clubbing Experience
+    </a>
+    <a class="nav-item" onclick="showPage('about',this)">
+      <span class="nav-icon">○</span> About Me
+    </a>
+  </div>
 
-<h2>
-
-Md. Minhazur Rahman Mahim
-
-</h2>
-
-<p>
-
-Writer • Journalist • Student
-
-</p>
-
-</div>
-
-<div class="nav">
-
-<a href="#home" onclick="showPage('home')">Home</a>
-
-<div class="menu-title">
-
-Writings
-
-</div>
-
-<div class="sub-menu">
-
-<a href="#articles" onclick="showPage('articles')">
-
-Bengali Articles
-
-</a>
-
-<a href="#reports" onclick="showPage('reports')">
-
-Special News Reports
-
-</a>
-
-</div>
-
-<a href="#education" onclick="showPage('education')">
-
-Education</a>
-
-<div class="menu-title">
-
-Experience
-
-</div>
-
-<div class="sub-menu">
-
-<a href="#job" onclick="showPage('job')">
-
-Job Experience
-
-</a>
-
-<a href="#club" onclick="showPage('club')">
-
-Clubbing Experience
-
-</a>
-
-</div>
-
-<a href="#about" onclick="showPage('about')">
-
-About Me
-
-</a>
-
-</div>
-
-</div>
-
-<!-- FLOATING PROFILE -->
-
-<div class="page-mini-profile" id="miniProfile">
-
-<img src="images/profile.jpg">
-
-<div class="page-mini-profile-text">
-
-<h4>
-
-Md. Minhazur
-<br>
-Rahman Mahim
-
-</h4>
-
-<span id="pageName">
-
-Home
-
-</span>
-
-</div>
-
-</div>
+  <div class="sidebar-footer">
+    <div class="sidebar-socials">
+      <a class="soc-btn" href="https://facebook.com/mdminhazur44rahman" target="_blank">f</a>
+      <a class="soc-btn" href="https://instagram.com/mdminhazurrahmanmahim" target="_blank" style="font-style:italic">ig</a>
+      <a class="soc-btn" href="https://linkedin.com/in/mdminhazur44rahman" target="_blank" style="font-size:10px;font-weight:800">in</a>
+    </div>
+  </div>
+</nav>
 
 <!-- MAIN -->
-
 <div class="main">
 
-<!-- HOME -->
-
-<div class="page active" id="home">
-
-<div class="page-banner">
-
-<img src="images/profile.jpg">
-
-</div>
-
-<div class="hero">
-
-<div class="hero-img">
-
-<img src="images/profile.jpg">
-
-</div>
-
-<div class="hero-content">
-
-<h1>
-
-Md. Minhazur
-<span class="gradient">
-
-Rahman Mahim
-
-</span>
-
-</h1>
-
-<p>
-
-Welcome to my official portfolio website.
-This platform represents my writings,
-educational journey, journalism,
-professional experiences and leadership activities.
-
-</p>
-
-<div class="current-box">
-
-<strong>
-
-Currently:
-
-</strong>
-
-<br><br>
-
-• Studying at Biomedical Engineering Department,
-Islamic University, Bangladesh.
-
-<br><br>
-
-• Working as Islamic University Correspondent at
-
-<a href="https://dainikamadershomoy.com" target="_blank" style="color:#60a5fa;text-decoration:none;">
-
-Daily Amader Shomoy
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ARTICLES -->
-
-<div class="page" id="articles">
-
-<h1 class="section-title">
-
-Bengali Articles
-
-</h1>
-
-<div class="article-layout">
-
-<div class="article-sidebar">
-
-<h3>Contents</h3><input type="text" id="articleSearch" class="search-box" placeholder="🔍 Search Article..." onkeyup="filterArticles()">
-
-<a href="#a29">29. মানবজীবনে টিকার গুরুত্ব</a>
-<a href="#a28">28. Article 28</a>
-<a href="#a27">27. Article 27</a>
-<a href="#a26">26. Article 26</a>
-<a href="#a25">25. Article 25</a>
-<a href="#a24">24. Article 24</a>
-<a href="#a23">23. Article 23</a>
-<a href="#a22">22. Article 22</a>
-<a href="#a21">21. Article 21</a>
-<a href="#a20">20. Article 20</a>
-<a href="#a19">19. Article 19</a>
-<a href="#a18">18. Article 18</a>
-<a href="#a17">17. Article 17</a>
-<a href="#a16">16. Article 16</a>
-<a href="#a15">15. Article 15</a>
-<a href="#a14">14. Article 14</a>
-<a href="#a13">13. Article 13</a>
-<a href="#a12">12. Article 12</a>
-<a href="#a11">11. Article 11</a>
-<a href="#a10">10. Article 10</a>
-<a href="#a9">09. Article 09</a>
-<a href="#a8">08. Article 08</a>
-<a href="#a7">07. Article 07</a>
-<a href="#a6">06. Article 06</a>
-<a href="#a5">05. Article 05</a>
-<a href="#a4">04. Article 04</a>
-<a href="#a3">03. Article 03</a>
-<a href="#a2">02. Article 02</a>
-<a href="#a1">01. Article 01</a>
-
-</div>
-
-<div class="article-wrapper">
-
-<div class="article-card" id="a29">
-<h2>মানবজীবনে টিকার গুরুত্ব</h2>
-<p>যুগে যুগে মানবজাতির কল্যাণে সবচেয়ে বেশি গুরুত্ব দেওয়া হচ্ছে স্বাস্থ্য সুরক্ষায়। স্বাস্থ্য সুরক্ষায় সবচেয়ে বড় বিপ্লব বা পরিবর্তন ঘটে টিকা প্রদানের উদ্ভব ঘটার মাধ্যমে। টিকা বা ভ্যাক্সিন হলো মানব শরীরের রোগ প্রতিরোধের একটি অনন্য মাধ্যম। যেকোনো একটি টিকা একটি রোগের বিরুদ্ধেই রোগ প্রতিরোধ ব্যবস্থা তৈরি করে থাকে। সাধারণত শরীরের ইমিউন সিস্টেমকে সক্রিয় করার জন্য নির্দিষ্ট রোগের ভাইরাস বা ব্যাকটেরিয়ার মৃত বা দুর্বল অংশকে শরীরে প্রবেশ করানো হয়। যাতে শরীরে আগে থেকেই এই ভাইরাস বা ব্যাকটেরিয়ার আক্রমণ থেকে রক্ষার জন্য অ্যান্টিবডি বা স্মৃতি কোষ তৈরি হয়ে থাকে। এর ফলে টিকা প্রদানের মাধ্যমে নির্দিষ্ট রোগের ভাইরাস/ব্যাকটেরিয়া প্রবেশ করলে আগে থেকে তৈরি হওয়া অ্যান্টিবডি উক্ত ভাইরাস/ব্যাকটেরিয়াকে ধ্বংস করে দেয় এবং মানুষ সেই নির্দিষ্ট রোগ থেকে দ্রুততম সময়ের মধ্যে আক্রান্ত হওয়া থেকে রক্ষা পায়। অনেকক্ষেত্রেই এই অ্যান্টিবডি সারা জীবন নির্দিষ্ট রোগ প্রতিরোধে সক্ষম হয়। তবে বিজ্ঞানীরা একটি নির্দিষ্ট রোগ বা রোগের জীবাণু যখন মহামারীতে রূপান্তরিত হয় বা হওয়ার সম্ভাবনা থাকে এবং পরবর্তীতে এর জীবাণু শনাক্ত করার পর এর অ্যান্টিবডি তৈরিতে সক্ষম হোন। 
-
-বিভিন্ন কমন ও অতি সম্ভাবনীয় রোগের টিকা শিশু জন্মানোর একটি নির্দিষ্ট সময় পর শিশুদের দেহে সাসপেনশন বা ইঞ্জেকশন আকারে প্রবেশ করানো হয়। এতে তারা সেইসব নির্দিষ্ট রোগ থেকে রক্ষা পায়। বাংলাদেশ সরকার ১০ টি রোগের টিকা বিনামূল্যে প্রদান করে থাকে। তবে অনেক গুরুতর রোগের টিকা এখন অব্দি বিনামূল্যে প্রদান করা উচিত হলেও সরকার সেসব টিকা বিনামূল্যে প্রদানের কোনো পদক্ষেপ এখন পর্যন্ত নেয় নি। তন্মধ্যে মেনিনজাইটিস, ইনফ্লুয়েঞ্জা, হেপাটাইটিস-এ, মাম্পস, ইত্যাদি অন্যতম। 
-
-তবে টিকা নেওয়ার আগে আমাদের অবশ্যই ডাক্তারের পরামর্শ নিতে হবে এবং এর কার্যকারিতা ও পার্শ্বপ্রতিক্রিয়া সম্বন্ধে অবগত হতে হবে। তবে অধিকাংশ টিকার ক্ষেত্রেই খুব কম সময়েই পার্শ্বপ্রতিক্রিয়া দেখা যায় আর দেখা গেলেও কোনো গুরুত্বপূর্ণ পার্শ্বপ্রতিক্রিয়া দেখা যায় না। সাধারণত সাময়িক জ্বর, মাথা ব্যথা ও লালচে দাগ হয়ে থাকে। টিকার উদ্ভবের মাধ্যমে বৈশ্বিকভাবে মানুষ লাভবান হয়েছে। টিকার মাধ্যমে মানুষ নিজে ও নিজের পরিবার ও আশেপাশের মানুষরা বিভিন্ন রোগ হতে রক্ষা পাচ্ছে। অনেক টিকার কারণেই কিছু মারাত্মক রোগ পুরোপুরি ভাবে নির্মূল হয়েছে। তন্মধ্যে পোলিও, মিজলস অন্যতম। টিকা নেওয়ার মাধ্যমে আমাদের সামাজিক স্বাস্থ্য সুরক্ষা পাচ্ছে ও আমরা অর্থনৈতিকভাবেও লাভবান হচ্ছি। কারণ টিকার মাধ্যমে চিকিৎসা ব্যয় হ্রাস পাচ্ছে।
-
-তবে মানুষের স্বাস্থ্য সুরক্ষার পাশাপাশি আমাদের আশেপাশের গবাদি পশুর স্বাস্থ্য সুরক্ষায়ও টিকা প্রদান করা অত্যন্ত গুরুত্বপূর্ণ। গবাদি পশুগুলোকে রোগব্যাধি থেকে সুরক্ষায় রাখা ও গবাদি পশুদের থেকে যাতে মানুষের মধ্যে রোগ-জীবাণু না ছড়ায় সেই লক্ষ্যে গবাদি পশু-পাখিদের মধ্যেও টিকা প্রদান করে হয়ে থাকে। কুকুর-বিড়ালের রেবিস ও লিউকেমিয়া ভাইরাস, গবাদি পশুর খুরা রোগ, মুরগির বার্ড ফ্লু সহ আরো নানা ধরণের মারাত্মক রোগের জন্য পশু-পাখিদের টিকা প্রদান করা হয়ে থাকে। পশু পাখিদের টিকা দেওয়ার মাধ্যমে রোগ প্রতিরোধ, মানুষের সুরক্ষা, পশুপাখির উৎপাদন বৃদ্ধি সহ স্বাস্থ্যকর পরিবেশ নিশ্চিত করা সম্ভব। 
-
-তাই টিকা নিয়ে বিভিন্ন প্রচলিত প্রোপাগান্ডা ও অসত্য ও ভিত্তিহীন তথ্যে বিশ্বাস স্থাপন না করে মানুষ ও পশুপাখির স্বাস্থ্য সুরক্ষায় নির্দিষ্ট সময়ে নির্দিষ্ট টিকা প্রদানের মাধ্যমে নিজেদের পরিবেশ, সমাজ ও রাষ্ট্রকে সুরক্ষিত রাখা সম্ভব। বিনামূল্যে প্রয়োজনীয় টিকা প্রদানের ব্যবস্থা আরো গতিশীল ও সুপরিকল্পনার মাধ্যমে করা, প্রকল্পের আওতায় থাকা টিকার প্রকল্প দ্রুত বাস্তবায়ন করা ও টিকা নিয়ে সচেতনতা বৃদ্ধি করার মাধ্যমে মানুষের স্বাস্থ্য সুরক্ষা বৃদ্ধি ও জীবনযাত্রার মানোন্নয়ন সম্ভব।</p>
-<a href="https://epaper.ittefaq.com.bd/edition/1663/2nd-edition/page/9?fbclid=IwY2xjawNG4MdleHRuA2FlbQIxMABicmlkETF6Q2tvSFJiT1ViOEZYcVQyAR4E8k6vbLhjp0BzWNI3f8Nl5rHzUP8bUuwqH9yCe8Pw9jv6X_uOALZ2U5oZog_aem_IYCaZj0qM23SKZpt8ItJIA" class="read-btn">Read at Daily Ittefaq</a>
-</div>
-
-<div class="article-card" id="a28">
-<h2>Article 28</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a27">
-<h2>Article 27</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a26">
-<h2>Article 26</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a25">
-<h2>Article 25</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a24">
-<h2>Article 24</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a23">
-<h2>Article 23</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a22">
-<h2>Article 22</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-<div class="article-card" id="a21">
-<h2>Article 21</h2>
-<p>Paste article here...</p>
-<a href="#" class="read-btn">Read At Newspaper</a>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- REPORTS -->
-
-<div class="page" id="reports">
-
-<h1 class="section-title">
-
-Special News Reports
-
-</h1>
-
-<div class="grid">
-
-<div class="card">
-<h3>Special Report 07</h3>
-<p>Paste report summary here...</p>
-<a href="#" class="read-btn">Read Full Report</a>
-</div>
-
-<div class="card">
-<h3>Special Report 06</h3>
-<p>Paste report summary here...</p>
-<a href="#" class="read-btn">Read Full Report</a>
-</div>
-
-<div class="card">
-<h3>Special Report 05</h3>
-<p>Paste report summary here...</p>
-<a href="#" class="read-btn">Read Full Report</a>
-</div>
-
-</div>
-
-</div>
-
-<!-- EDUCATION -->
-
-<div class="page" id="education">
-
-<h1 class="section-title">
-
-Education
-
-</h1>
-
-<div class="grid">
-
-<div class="card">
-
-<img src="images/edu1.png">
-
-<h3>
-
-Islamic University
-
-</h3>
-
-<p>
-
-Biomedical Engineering Department
-
-</p>
-
-</div>
-
-<div class="card">
-
-<img src="images/edu2.png">
-
-<h3>
-
-Your College
-
-</h3>
-
-<p>
-
-Higher Secondary Education
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- JOB -->
-
-<div class="page" id="job">
-
-<h1 class="section-title">
-
-Job Experience
-
-</h1>
-
-<div class="grid">
-
-<div class="card">
-
-<img src="images/job1.png">
-
-<h3>
-
-Daily Amader Shomoy
-
-</h3>
-
-<p>
-
-Islamic University Correspondent
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- CLUB -->
-
-<div class="page" id="club">
-
-<h1 class="section-title">
-
-Clubbing Experience
-
-</h1>
-
-<div class="grid">
-
-<div class="card">
-
-<img src="images/club1.png">
-
-<h3>
-
-Club Name
-
-</h3>
-
-<p>
-
-Leadership / Member
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ABOUT -->
-
-<div class="page" id="about">
-
-<h1 class="section-title">
-
-About Me
-
-</h1>
-
-<div class="about-box">
-
-<p>
-
-I am Md. Minhazur Rahman Mahim.
-
-Currently residing at Islamic University,
-Kushtia, Bangladesh.
-
-I am passionate about writing,
-education, journalism,
-research and leadership.
-
-</p>
-
-<a href="mailto:mdminhazur44rahman@gmail.com" class="email-box">
-
-Contact Me At Email
-
-</a>
-
-</div>
-
-</div>
-
-<!-- FOOTER -->
-
-<footer>
-
-<p>
-
-© 2026 Md. Minhazur Rahman Mahim.
-All Rights Reserved.
-
-</p>
-
-<div class="socials">
-
-<a href="https://facebook.com/mdminhazur44rahman" target="_blank">
-
-Facebook
-
-</a>
-
-<a href="https://instagram.com/mdminhazurrahmanmahim" target="_blank">
-
-Instagram
-
-</a>
-
-<a href="https://linkedin.com/in/mdminhazur44rahman" target="_blank">
-
-LinkedIn
-
-</a>
-
-</div>
-
-</footer>
-
-</div>
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <span class="topbar-title" id="topbar-title">Home</span>
+    <div class="topbar-right">
+      <button class="tb-btn" onclick="toggleTheme()" id="theme-btn">☀️</button>
+      <button class="tb-btn hamburger" onclick="toggleSidebar()">☰</button>
+    </div>
+  </div>
+
+  <!-- ═══════ HOME ═══════ -->
+  <div class="page active" id="home">
+    <div class="page-bg" id="home-bg">
+      <div class="bg-grid"></div>
+      <div class="bg-orb" style="width:500px;height:500px;background:rgba(0,220,255,0.06);top:-150px;right:-150px;animation-duration:10s;"></div>
+      <div class="bg-orb" style="width:400px;height:400px;background:rgba(0,255,157,0.04);bottom:-100px;left:-100px;animation-duration:13s;animation-delay:-4s;"></div>
+      <canvas id="dna-canvas" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12;"></canvas>
+    </div>
+
+    <div class="hero">
+      <div class="hero-left">
+        <div class="hero-greeting">Biomedical Engineer &amp; Journalist</div>
+        <h1 class="hero-name">Md. Minhazur<br><span>Rahman Mahim</span></h1>
+        <p class="hero-sub">Engineering Life. Reporting Truth.</p>
+        <div class="role-pills">
+          <span class="role-pill">BME Student</span>
+          <span class="role-pill">Campus Journalist</span>
+          <span class="role-pill">Aspiring Researcher</span>
+          <span class="role-pill">IEEE EMBS</span>
+          <span class="role-pill">Social Advocate</span>
+        </div>
+        <p class="hero-bio">A third-year Bachelor of Science student in Biomedical Engineering at Islamic University, Kushtia, Bangladesh. Passionate about research, innovation, community service, and science communication. Simultaneously serving as a campus correspondent for multiple Bengali daily newspapers.</p>
+        <div class="hero-stats">
+          <div class="stat"><div class="stat-num">29</div><div class="stat-label">Articles</div></div>
+          <div class="stat"><div class="stat-num">7</div><div class="stat-label">Outlets</div></div>
+          <div class="stat"><div class="stat-num">8+</div><div class="stat-label">Orgs</div></div>
+          <div class="stat"><div class="stat-num">3rd</div><div class="stat-label">Year</div></div>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" onclick="showPage('articles',document.querySelector('[onclick*=articles]'))">Read Articles →</a>
+          <a class="btn btn-outline" onclick="showPage('about',document.querySelector('[onclick*=about]'))">About Me</a>
+          <a class="btn btn-outline" href="https://sites.google.com/view/md-minhazur-rahman-mahim" target="_blank">Portfolio ↗</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-card">
+          <img src="images/profile.jpg" alt="Minhaz" class="hero-card-photo">
+          <div class="hero-card-name">Md. Minhazur Rahman Mahim</div>
+          <div class="hero-card-role">BME · Islamic University</div>
+          <div class="currently-box">
+            <div class="currently-label">Currently</div>
+            <div class="cur-item"><div class="cur-dot"></div>B.Sc. (Engg.) in BME — IU</div>
+            <div class="cur-item"><div class="cur-dot"></div>Publication Coordinator — IEEE EMBS</div>
+            <div class="cur-item"><div class="cur-dot"></div>IT Secretary — Biomed Innovates</div>
+            <div class="cur-item"><div class="cur-dot"></div>Correspondent — Multiple Bengali Dailies</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ ARTICLES ═══════ -->
+  <div class="page" id="articles">
+    <div class="page-bg">
+      <div class="bg-grid"></div>
+      <div class="bg-orb" style="width:600px;height:400px;background:rgba(255,107,53,0.05);top:-100px;right:-200px;animation-duration:11s;"></div>
+      <div class="bg-orb" style="width:350px;height:350px;background:rgba(255,107,53,0.03);bottom:-80px;left:100px;animation-duration:15s;animation-delay:-5s;"></div>
+      <div id="ink-lines-container"></div>
+    </div>
+    <div class="page-inner">
+      <div class="section-eyebrow">Writing</div>
+      <h2 class="section-title">Bengali Articles</h2>
+      <div class="section-line" style="background:linear-gradient(90deg,var(--accent3),transparent);"></div>
+
+      <div class="articles-search">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="article-search" placeholder="Search articles by title or newspaper..." oninput="filterArticles()">
+        </div>
+        <div class="articles-count" id="articles-count">Showing 29 articles</div>
+      </div>
+
+      <div class="articles-grid" id="articles-grid">
+        <div class="article-card" data-title="মানবজীবনে টিকার গুরুত্ব" data-paper="daily ittefaq">
+          <div class="article-num">No. 29</div>
+          <div class="article-paper">Daily Ittefaq</div>
+          <div class="article-title-bn">মানবজীবনে টিকার গুরুত্ব</div>
+          <a class="article-read-btn" href="https://epaper.ittefaq.com.bd/edition/1663/2nd-edition/page/9" target="_blank">Read at Daily Ittefaq ↗</a>
+        </div>
+        <div class="article-card" data-title="পাবলিক বিশ্ববিদ্যালয়ে শিক্ষকতা" data-paper="daily karatoa">
+          <div class="article-num">No. 28</div>
+          <div class="article-paper">Daily Karatoa</div>
+          <div class="article-title-bn">পাবলিক বিশ্ববিদ্যালয়ে শিক্ষকতা</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Karatoa ↗</a>
+        </div>
+        <div class="article-card" data-title="পশ্চাদপদ মানসিকতা পরিহার করুন" data-paper="daily jai jai din">
+          <div class="article-num">No. 27</div>
+          <div class="article-paper">Daily Jai Jai Din</div>
+          <div class="article-title-bn">পশ্চাদপদ মানসিকতা পরিহার করুন</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Jai Jai Din ↗</a>
+        </div>
+        <div class="article-card" data-title="বিশ্ববিদ্যালয়ে সিনিয়র-জুনিয়র সম্পর্ক" data-paper="daily share biz">
+          <div class="article-num">No. 26</div>
+          <div class="article-paper">Daily Share Biz</div>
+          <div class="article-title-bn">বিশ্ববিদ্যালয়ে সিনিয়র-জুনিয়র সম্পর্ক যেমন হওয়া উচিত</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Share Biz ↗</a>
+        </div>
+        <div class="article-card" data-title="বন্ধু নির্বাচনে হতে হবে সতর্ক" data-paper="daily jai jai din">
+          <div class="article-num">No. 25</div>
+          <div class="article-paper">Daily Jai Jai Din</div>
+          <div class="article-title-bn">বন্ধু নির্বাচনে হতে হবে সতর্ক</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Jai Jai Din ↗</a>
+        </div>
+        <div class="article-card" data-title="ইদ হলো ঐক্যের ইদ হলো ভাতৃত্বের" data-paper="daily khola kagoj">
+          <div class="article-num">No. 24</div>
+          <div class="article-paper">Daily Khola Kagoj</div>
+          <div class="article-title-bn">ইদ হলো ঐক্যের, ইদ হলো ভাতৃত্বের</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Khola Kagoj ↗</a>
+        </div>
+        <div class="article-card" data-title="শিক্ষার্থীদের ঝরে পড়া রোধ করতে হবে" data-paper="daily ittefaq">
+          <div class="article-num">No. 23</div>
+          <div class="article-paper">Daily Ittefaq</div>
+          <div class="article-title-bn">শিক্ষার্থীদের ঝরে পড়া রোধ করতে হবে</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Ittefaq ↗</a>
+        </div>
+        <div class="article-card" data-title="বাংলাদেশ যেভাবে পরিবেশ দূষণের শীর্ষে" data-paper="daily share biz">
+          <div class="article-num">No. 22</div>
+          <div class="article-paper">Daily Share Biz</div>
+          <div class="article-title-bn">বাংলাদেশ যেভাবে পরিবেশ দূষণের শীর্ষে</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Share Biz ↗</a>
+        </div>
+        <div class="article-card" data-title="ইবির অগঠিত ওয়েবসাইট" data-paper="daily amader shomoy">
+          <div class="article-num">No. 21</div>
+          <div class="article-paper">Daily Amader Shomoy</div>
+          <div class="article-title-bn">ইবির অগঠিত ওয়েবসাইট</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Amader Shomoy ↗</a>
+        </div>
+        <div class="article-card" data-title="বন্ধ হোক পলিথিন সন্ধি হোক পাটের সাথে" data-paper="daily janakantha">
+          <div class="article-num">No. 20</div>
+          <div class="article-paper">Daily Janakantha</div>
+          <div class="article-title-bn">বন্ধ হোক পলিথিন, সন্ধি হোক পাটের সাথে</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Janakantha ↗</a>
+        </div>
+        <div class="article-card" data-title="স্মার্ট বাংলাদেশে কিশোর গ্যাং যখন বিষফোড়া" data-paper="daily karatoa">
+          <div class="article-num">No. 19</div>
+          <div class="article-paper">Daily Karatoa</div>
+          <div class="article-title-bn">স্মার্ট বাংলাদেশে কিশোর গ্যাং যখন বিষফোড়া</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Karatoa ↗</a>
+        </div>
+        <div class="article-card" data-title="পরিবার পরিকল্পনা" data-paper="daily jai jai din">
+          <div class="article-num">No. 18</div>
+          <div class="article-paper">Daily Jai Jai Din</div>
+          <div class="article-title-bn">পরিবার পরিকল্পনা</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Jai Jai Din ↗</a>
+        </div>
+        <div class="article-card" data-title="ইবির অভ্যন্তরে ভাঙ্গা রাস্তা" data-paper="daily kaler kantho">
+          <div class="article-num">No. 17</div>
+          <div class="article-paper">Daily Kaler Kantho</div>
+          <div class="article-title-bn">ইবির অভ্যন্তরে ভাঙ্গা রাস্তা</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Kaler Kantho ↗</a>
+        </div>
+        <div class="article-card" data-title="বাংলাদেশের নদী ও রেল লাইনের পাশের এলাকাগুলো" data-paper="daily jai jai din">
+          <div class="article-num">No. 16</div>
+          <div class="article-paper">Daily Jai Jai Din</div>
+          <div class="article-title-bn">বাংলাদেশের নদী ও রেল লাইনের পাশের এলাকাগুলো বস্তি থেকে স্বস্তির হবে কবে?</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Jai Jai Din ↗</a>
+        </div>
+        <div class="article-card" data-title="প্রতি জেলায় পাবলিক বিশ্ববিদ্যালয়" data-paper="daily bhorer kagoj">
+          <div class="article-num">No. 15</div>
+          <div class="article-paper">Daily Bhorer Kagoj</div>
+          <div class="article-title-bn">প্রতি জেলায় পাবলিক বিশ্ববিদ্যালয়</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Bhorer Kagoj ↗</a>
+        </div>
+        <div class="article-card" data-title="সমস্যায় পরিপূর্ণ ইসলামী বিশ্ববিদ্যালয়" data-paper="daily share biz">
+          <div class="article-num">No. 14</div>
+          <div class="article-paper">Daily Share Biz</div>
+          <div class="article-title-bn">সমস্যায় পরিপূর্ণ ইসলামী বিশ্ববিদ্যালয়</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Share Biz ↗</a>
+        </div>
+        <div class="article-card" data-title="বিশ্বের কোথায় ধর্ষণের শাস্তি কেমন" data-paper="daily jai jai din">
+          <div class="article-num">No. 13</div>
+          <div class="article-paper">Daily Jai Jai Din</div>
+          <div class="article-title-bn">বিশ্বের কোথায় ধর্ষণের শাস্তি কেমন</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Jai Jai Din ↗</a>
+        </div>
+        <div class="article-card" data-title="বন্ধু হলো জীবনের এক অমূল্য উপহার" data-paper="daily ittefaq">
+          <div class="article-num">No. 12</div>
+          <div class="article-paper">Daily Ittefaq</div>
+          <div class="article-title-bn">বন্ধু হলো জীবনের এক অমূল্য উপহার</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Ittefaq ↗</a>
+        </div>
+        <div class="article-card" data-title="শৌচাগারে মোবাইল চালানোর অপকারিতা" data-paper="daily sangbad">
+          <div class="article-num">No. 11</div>
+          <div class="article-paper">Daily Sangbad</div>
+          <div class="article-title-bn">শৌচাগারে মোবাইল চালানোর অপকারিতা</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Sangbad ↗</a>
+        </div>
+        <div class="article-card" data-title="বন্ধ হোক পোষ্য কোটা" data-paper="daily bhorer kagoj">
+          <div class="article-num">No. 10</div>
+          <div class="article-paper">Daily Bhorer Kagoj</div>
+          <div class="article-title-bn">বন্ধ হোক পোষ্য কোটা</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Bhorer Kagoj ↗</a>
+        </div>
+        <div class="article-card" data-title="তরুণদের চোখে আগামীর বাংলাদেশ" data-paper="daily karatoa">
+          <div class="article-num">No. 09</div>
+          <div class="article-paper">Daily Karatoa</div>
+          <div class="article-title-bn">তরুণদের চোখে আগামীর বাংলাদেশ</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Karatoa ↗</a>
+        </div>
+        <div class="article-card" data-title="প্রবীণরা অবহেলার স্বীকার না হোক" data-paper="daily ittefaq">
+          <div class="article-num">No. 08</div>
+          <div class="article-paper">Daily Ittefaq</div>
+          <div class="article-title-bn">প্রবীণরা অবহেলার স্বীকার না হোক</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Ittefaq ↗</a>
+        </div>
+        <div class="article-card" data-title="পাবলিকিয়ান হওয়ার যুদ্ধ" data-paper="daily sangram">
+          <div class="article-num">No. 07</div>
+          <div class="article-paper">Daily Sangram</div>
+          <div class="article-title-bn">পাবলিকিয়ান হওয়ার যুদ্ধ</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Sangram ↗</a>
+        </div>
+        <div class="article-card" data-title="শীতের আর্তনাদ" data-paper="daily sangbad">
+          <div class="article-num">No. 06</div>
+          <div class="article-paper">Daily Sangbad</div>
+          <div class="article-title-bn">শীতের আর্তনাদ</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Sangbad ↗</a>
+        </div>
+        <div class="article-card" data-title="ইবির জিমনেসিয়ামে যত সমস্যা" data-paper="daily ajkaler khobor">
+          <div class="article-num">No. 05</div>
+          <div class="article-paper">Daily Ajkaler Khobor</div>
+          <div class="article-title-bn">ইবির জিমনেসিয়ামে যত সমস্যা</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Ajkaler Khobor ↗</a>
+        </div>
+        <div class="article-card" data-title="সমুন্নত হোক ইবির গ্রন্থাগার" data-paper="daily amader shomoy">
+          <div class="article-num">No. 04</div>
+          <div class="article-paper">Daily Amader Shomoy</div>
+          <div class="article-title-bn">সমুন্নত হোক ইবির গ্রন্থাগার</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Amader Shomoy ↗</a>
+        </div>
+        <div class="article-card" data-title="সামাজিক যোগাযোগ মাধ্যমে নিষ্ক্রিয় ইবি" data-paper="daily amader shomoy">
+          <div class="article-num">No. 03</div>
+          <div class="article-paper">Daily Amader Shomoy</div>
+          <div class="article-title-bn">সামাজিক যোগাযোগ মাধ্যমে নিষ্ক্রিয় ইবি</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Amader Shomoy ↗</a>
+        </div>
+        <div class="article-card" data-title="চালু হোক ইবির ক্যাফেটেরিয়া" data-paper="prothom alo">
+          <div class="article-num">No. 02</div>
+          <div class="article-paper">Prothom Alo</div>
+          <div class="article-title-bn">চালু হোক ইবির ক্যাফেটেরিয়া</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Prothom Alo ↗</a>
+        </div>
+        <div class="article-card" data-title="ইবির ফোয়ারা চালু হোক" data-paper="daily kaler kantho">
+          <div class="article-num">No. 01</div>
+          <div class="article-paper">Daily Kaler Kantho</div>
+          <div class="article-title-bn">ইবির ফোয়ারা চালু হোক</div>
+          <a class="article-read-btn" href="#" target="_blank">Read at Daily Kaler Kantho ↗</a>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span>© 2026 Md. Minhazur Rahman Mahim</span>
+        <div class="footer-socials">
+          <a class="footer-soc" href="https://facebook.com/mdminhazur44rahman" target="_blank">Facebook</a>
+          <a class="footer-soc" href="https://instagram.com/mdminhazurrahmanmahim" target="_blank">Instagram</a>
+          <a class="footer-soc" href="https://linkedin.com/in/mdminhazur44rahman" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ REPORTS ═══════ -->
+  <div class="page" id="reports">
+    <div class="page-bg">
+      <div class="bg-grid"></div>
+      <div class="bg-orb" style="width:500px;height:500px;background:rgba(255,61,113,0.05);top:-200px;right:0;animation-duration:12s;"></div>
+    </div>
+    <div class="page-inner">
+      <div class="section-eyebrow">Journalism</div>
+      <h2 class="section-title">Special News Reports</h2>
+      <div class="section-line" style="background:linear-gradient(90deg,var(--warn),transparent);"></div>
+      <div class="reports-grid">
+        <div class="report-card">
+          <div class="report-num">Report 07</div>
+          <div class="report-title">Special Report 07</div>
+          <div class="report-desc">Paste report summary here...</div>
+          <a href="#" class="report-btn">Read Full Report ↗</a>
+        </div>
+        <div class="report-card">
+          <div class="report-num">Report 06</div>
+          <div class="report-title">Special Report 06</div>
+          <div class="report-desc">Paste report summary here...</div>
+          <a href="#" class="report-btn">Read Full Report ↗</a>
+        </div>
+        <div class="report-card">
+          <div class="report-num">Report 05</div>
+          <div class="report-title">Special Report 05</div>
+          <div class="report-desc">Paste report summary here...</div>
+          <a href="#" class="report-btn">Read Full Report ↗</a>
+        </div>
+        <div class="report-card">
+          <div class="report-num">Report 04</div>
+          <div class="report-title">Special Report 04</div>
+          <div class="report-desc">Paste report summary here...</div>
+          <a href="#" class="report-btn">Read Full Report ↗</a>
+        </div>
+        <div class="report-card">
+          <div class="report-num">Report 03</div>
+          <div class="report-title">Special Report 03</div>
+          <div class="report-desc">Paste report summary here...</div>
+          <a href="#" class="report-btn">Read Full Report ↗</a>
+        </div>
+        <div class="report-card">
+          <div class="report-num">Report 02</div>
+          <div class="report-title">Special Report 02</div>
+          <div class="report-desc">Paste report summary here...</div>
+          <a href="#" class="report-btn">Read Full Report ↗</a>
+        </div>
+        <div class="report-card">
+          <div class="report-num">Report 01</div>
+          <div class="report-title">Special Report 01</div>
+          <div class="report-desc">Paste report summary here...</div>
+          <a href="#" class="report-btn">Read Full Report ↗</a>
+        </div>
+      </div>
+      <div class="page-footer">
+        <span>© 2026 Md. Minhazur Rahman Mahim</span>
+        <div class="footer-socials">
+          <a class="footer-soc" href="https://facebook.com/mdminhazur44rahman" target="_blank">Facebook</a>
+          <a class="footer-soc" href="https://instagram.com/mdminhazurrahmanmahim" target="_blank">Instagram</a>
+          <a class="footer-soc" href="https://linkedin.com/in/mdminhazur44rahman" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ EDUCATION ═══════ -->
+  <div class="page" id="education">
+    <div class="page-bg">
+      <div class="bg-grid"></div>
+      <div class="bg-orb" style="width:600px;height:600px;background:rgba(0,255,157,0.04);top:-200px;left:50%;transform:translateX(-50%);animation-duration:14s;"></div>
+      <div id="data-streams"></div>
+    </div>
+    <div class="page-inner">
+      <div class="section-eyebrow">Academic Journey</div>
+      <h2 class="section-title">Education</h2>
+      <div class="section-line" style="background:linear-gradient(90deg,var(--accent2),transparent);"></div>
+
+      <div class="edu-timeline">
+        <div class="edu-item">
+          <div class="edu-node">🎓</div>
+          <div class="edu-content">
+            <div class="edu-period">August 2023 — Present</div>
+            <div class="edu-degree">B.Sc. (Engg.) in Biomedical Engineering</div>
+            <div class="edu-inst">Islamic University, Kushtia, Bangladesh</div>
+            <div class="edu-note">Session 2022–23 · Faculty of Engineering &amp; Technology · Third Year</div>
+            <div class="edu-badges">
+              <span class="edu-badge gold">Currently Running</span>
+              <span class="edu-badge">50 Seats / Batch</span>
+              <span class="edu-badge">8th Batch</span>
+              <span class="edu-badge">5th Dept. in FET</span>
+              <span class="edu-badge">29th Dept. Overall</span>
+            </div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-node">🏛️</div>
+          <div class="edu-content">
+            <div class="edu-period">Class of 2022</div>
+            <div class="edu-degree">Higher Secondary Certificate (HSC)</div>
+            <div class="edu-inst">Government Bangla College, Dhaka</div>
+            <div class="edu-badges">
+              <span class="edu-badge gold">GPA 4.50 / 5.00</span>
+              <span class="edu-badge">Science Group</span>
+            </div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-node">🏫</div>
+          <div class="edu-content">
+            <div class="edu-period">Class of 2020</div>
+            <div class="edu-degree">Secondary School Certificate (SSC)</div>
+            <div class="edu-inst">Tongi Pilot High School, Gazipur</div>
+            <div class="edu-badges">
+              <span class="edu-badge gold">GPA 5.00 / 5.00 ✦</span>
+              <span class="edu-badge">Science Group</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span>© 2026 Md. Minhazur Rahman Mahim</span>
+        <div class="footer-socials">
+          <a class="footer-soc" href="https://facebook.com/mdminhazur44rahman" target="_blank">Facebook</a>
+          <a class="footer-soc" href="https://instagram.com/mdminhazurrahmanmahim" target="_blank">Instagram</a>
+          <a class="footer-soc" href="https://linkedin.com/in/mdminhazur44rahman" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ JOB ═══════ -->
+  <div class="page" id="job">
+    <div class="page-bg">
+      <div class="bg-grid"></div>
+      <div class="bg-orb" style="width:450px;height:450px;background:rgba(0,220,255,0.04);bottom:-100px;right:-100px;animation-duration:10s;"></div>
+    </div>
+    <div class="page-inner">
+      <div class="section-eyebrow">Professional</div>
+      <h2 class="section-title">Job Experience</h2>
+      <div class="section-line"></div>
+      <div class="exp-grid">
+        <div class="exp-card">
+          <div class="exp-logo">📰</div>
+          <div class="exp-org">Daily Agrajatra Pratidin</div>
+          <div class="exp-role">Islamic University Correspondent</div>
+          <div class="exp-period">January 2026 — Present</div>
+          <span class="exp-status current"><span class="status-dot"></span> Current</span>
+        </div>
+        <div class="exp-card">
+          <div class="exp-logo">📺</div>
+          <div class="exp-org">Sunnews</div>
+          <div class="exp-role">Islamic University Correspondent</div>
+          <div class="exp-period">January 2026 — Present</div>
+          <span class="exp-status current"><span class="status-dot"></span> Current</span>
+        </div>
+        <div class="exp-card">
+          <div class="exp-logo">📰</div>
+          <div class="exp-org">The Daily Aajker Probhat</div>
+          <div class="exp-role">Islamic University Correspondent</div>
+          <div class="exp-period">December 2025 — Present</div>
+          <span class="exp-status current"><span class="status-dot"></span> Current</span>
+        </div>
+        <div class="exp-card">
+          <div class="exp-logo">📰</div>
+          <div class="exp-org">Noya Songbad</div>
+          <div class="exp-role">Islamic University Correspondent</div>
+          <div class="exp-period">June 2025 — Present</div>
+          <span class="exp-status current"><span class="status-dot"></span> Current</span>
+        </div>
+        <div class="exp-card">
+          <div class="exp-logo">📡</div>
+          <div class="exp-org">BMF Television</div>
+          <div class="exp-role">Islamic University Correspondent</div>
+          <div class="exp-period">June 2025 — Present</div>
+          <span class="exp-status current"><span class="status-dot"></span> Current</span>
+        </div>
+        <div class="exp-card">
+          <div class="exp-logo">📰</div>
+          <div class="exp-org">Daynik Desherkotha</div>
+          <div class="exp-role">Islamic University Correspondent</div>
+          <div class="exp-period">June 2025 — Present</div>
+          <span class="exp-status current"><span class="status-dot"></span> Current</span>
+        </div>
+        <div class="exp-card">
+          <div class="exp-logo">📰</div>
+          <div class="exp-org">Daily Rupalidesh</div>
+          <div class="exp-role">Islamic University Correspondent</div>
+          <div class="exp-period">February 2025 — May 2025</div>
+          <span class="exp-status former">Former</span>
+        </div>
+      </div>
+      <div class="page-footer">
+        <span>© 2026 Md. Minhazur Rahman Mahim</span>
+        <div class="footer-socials">
+          <a class="footer-soc" href="https://facebook.com/mdminhazur44rahman" target="_blank">Facebook</a>
+          <a class="footer-soc" href="https://instagram.com/mdminhazurrahmanmahim" target="_blank">Instagram</a>
+          <a class="footer-soc" href="https://linkedin.com/in/mdminhazur44rahman" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ CLUB ═══════ -->
+  <div class="page" id="club">
+    <div class="page-bg">
+      <div class="bg-grid"></div>
+      <div class="bg-orb" style="width:500px;height:500px;background:rgba(147,51,234,0.05);top:-100px;left:-100px;animation-duration:11s;"></div>
+      <div id="network-nodes-container"></div>
+    </div>
+    <div class="page-inner">
+      <div class="section-eyebrow">Organizational</div>
+      <h2 class="section-title">Clubbing Experience</h2>
+      <div class="section-line" style="background:linear-gradient(90deg,#9333ea,transparent);"></div>
+      <div class="exp-grid">
+        <div class="exp-card">
+          <div class="exp-logo">⚡</div>
+          <div class="exp-org">IEEE EMBS IU Student Branch</div>
+          <div class="exp-role">Publication Coordinator</div>
+          <div class="exp-period">Sep 22, 2025 — Present (Coordinator)</div>
+          <div class="exp-period">Jan 1, 2025 — Present (Member)</div>
+          <span class="exp-status current"><span class="status-dot"></span> Current</span>
+        </div>
+        <div class="exp-card">
+          <div class="exp-logo">🔬</div>
+          <div class="exp-org">Biomed Innovates</div>
+          <div class="exp-role">IT Secretary</div>
+          <div class="exp-period">Jan 21, 2026 — Present (IT Secretary)</div>
+          <div class="exp-period">Feb 5, 2025 – Jan 20, 2026 (Publicity Secretary)</div>
+          <span class="exp-status current"><span class="status-dot"></span> Current</span>
+        </div>
+        <div class="exp-card">
+          <div class="exp-logo">📚</div>
+          <div class="exp-org">Pathakbondhu IU Unit</div>
+          <div class="exp-role">Organizing Secretary</div>
+          <div class="exp-period">December 5, 2024 — Present</div>
+          <span class="exp-status current"><span class="status-dot"></span> Current</span>
+        </div>
+        <div class="exp-card">
+          <div class="exp-logo">🔭</div>
+          <div class="exp-org">IU Science Club</div>
+          <div class="exp-role">General Member</div>
+          <div class="exp-period">November 28, 2023 — Present</div>
+          <span class="exp-status current"><span class="status-dot"></span> Current</span>
+        </div>
+        <div class="exp-card">
+          <div class="exp-logo">🗣️</div>
+          <div class="exp-org">IU Debating Society</div>
+          <div class="exp-role">General Member</div>
+          <div class="exp-period">November 18, 2023 — Present</div>
+          <span class="exp-status current"><span class="status-dot"></span> Current</span>
+        </div>
+        <div class="exp-card">
+          <div class="exp-logo">✍️</div>
+          <div class="exp-org">Bangladesh Torun Column Lekhok Forum</div>
+          <div class="exp-role">Former Member</div>
+          <div class="exp-period">Oct 2023 – Jul 2025</div>
+          <span class="exp-status former">Former</span>
+        </div>
+        <div class="exp-card">
+          <div class="exp-logo">🛒</div>
+          <div class="exp-org">Consumer Youth Bangladesh</div>
+          <div class="exp-role">Former General Member (IU Unit)</div>
+          <div class="exp-period">December 5, 2024 – August 2, 2025</div>
+          <span class="exp-status former">Former</span>
+        </div>
+        <div class="exp-card">
+          <div class="exp-logo">🌿</div>
+          <div class="exp-org">Green Voice</div>
+          <div class="exp-role">Former General Member (IU Unit)</div>
+          <div class="exp-period">December 17, 2023 – January 17, 2025</div>
+          <span class="exp-status former">Former</span>
+        </div>
+        <div class="exp-card">
+          <div class="exp-logo">🏥</div>
+          <div class="exp-org">Bangladesh Red Crescent Society</div>
+          <div class="exp-role">Former RCY Volunteer</div>
+          <div class="exp-period">February 28, 2022 – October 30, 2023</div>
+          <span class="exp-status former">Former</span>
+        </div>
+      </div>
+      <div class="page-footer">
+        <span>© 2026 Md. Minhazur Rahman Mahim</span>
+        <div class="footer-socials">
+          <a class="footer-soc" href="https://facebook.com/mdminhazur44rahman" target="_blank">Facebook</a>
+          <a class="footer-soc" href="https://instagram.com/mdminhazurrahmanmahim" target="_blank">Instagram</a>
+          <a class="footer-soc" href="https://linkedin.com/in/mdminhazur44rahman" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ ABOUT ═══════ -->
+  <div class="page" id="about">
+    <div class="page-bg">
+      <div class="bg-grid"></div>
+      <div class="bg-orb" style="width:500px;height:500px;background:rgba(0,220,255,0.04);top:-100px;right:-100px;animation-duration:12s;"></div>
+    </div>
+    <div class="page-inner">
+      <div class="section-eyebrow">Personal</div>
+      <h2 class="section-title">About Me</h2>
+      <div class="section-line"></div>
+      <div class="about-layout">
+        <div>
+          <div class="about-photo-card">
+            <img src="images/about.jpg" alt="Minhaz">
+            <div class="about-photo-label">Md. Minhazur Rahman Mahim</div>
+          </div>
+        </div>
+        <div>
+          <p class="about-bio">I'm <strong style="color:var(--text)">Md. Minhazur Rahman Mahim</strong>, a third-year Biomedical Engineering student at Islamic University, Kushtia, Bangladesh (Session 2022–23). I'm passionate about the intersection of engineering, healthcare, and social impact.</p>
+          <p class="about-bio">Alongside my studies, I work as a campus correspondent for multiple Bengali daily newspapers and TV channels, covering university events, academic achievements, and campus issues. I believe in science communication and using journalism as a tool for positive change.</p>
+          <p class="about-bio">I actively participate in IEEE EMBS, Biomed Innovates, Pathakbondhu, and other campus organizations. My interests span biomedical research, youth empowerment, and environmental advocacy.</p>
+
+          <div class="about-section-label">Contact &amp; Links</div>
+          <div class="contact-item"><span class="contact-icon">✉️</span><a class="contact-link" href="mailto:mdminhazur.news@gmail.com">mdminhazur.news@gmail.com</a></div>
+          <div class="contact-item"><span class="contact-icon">📍</span> Islamic University, Kushtia, Bangladesh</div>
+          <div class="contact-item"><span class="contact-icon">🌐</span><a class="contact-link" href="https://sites.google.com/view/md-minhazur-rahman-mahim" target="_blank">Portfolio Website ↗</a></div>
+          <div class="contact-item"><span class="contact-icon" style="font-weight:700">f</span><a class="contact-link" href="https://facebook.com/mdminhazur44rahman" target="_blank">facebook.com/mdminhazur44rahman</a></div>
+          <div class="contact-item"><span class="contact-icon" style="font-style:italic">ig</span><a class="contact-link" href="https://instagram.com/mdminhazurrahmanmahim" target="_blank">instagram.com/mdminhazurrahmanmahim</a></div>
+          <div class="contact-item"><span class="contact-icon" style="font-size:10px;font-weight:800">in</span><a class="contact-link" href="https://linkedin.com/in/mdminhazur44rahman" target="_blank">linkedin.com/in/mdminhazur44rahman</a></div>
+
+          <div class="about-section-label">Interests &amp; Skills</div>
+          <div class="skills-wrap">
+            <span class="skill-tag">Biomedical Engineering</span>
+            <span class="skill-tag">Research</span>
+            <span class="skill-tag">Journalism</span>
+            <span class="skill-tag">Science Writing</span>
+            <span class="skill-tag">Social Advocacy</span>
+            <span class="skill-tag">IEEE EMBS</span>
+            <span class="skill-tag">Community Service</span>
+            <span class="skill-tag">Environmental Issues</span>
+            <span class="skill-tag">Youth Empowerment</span>
+          </div>
+        </div>
+      </div>
+      <div class="page-footer">
+        <span>© 2026 Md. Minhazur Rahman Mahim</span>
+        <div class="footer-socials">
+          <a class="footer-soc" href="https://facebook.com/mdminhazur44rahman" target="_blank">Facebook</a>
+          <a class="footer-soc" href="https://instagram.com/mdminhazurrahmanmahim" target="_blank">Instagram</a>
+          <a class="footer-soc" href="https://linkedin.com/in/mdminhazur44rahman" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end .main -->
 
 <script>
-
-const pageTitles={
-
-home:'Home',
-articles:'Bengali Articles',
-reports:'Special News Reports',
-education:'Education',
-job:'Job Experience',
-club:'Clubbing Experience',
-about:'About Me'
-
+const pageNames = {
+  home:'Home', articles:'Bengali Articles', reports:'Special News Reports',
+  education:'Education', job:'Job Experience', club:'Clubbing Experience', about:'About Me'
 };
 
-function showPage(pageId){
+function showPage(id, navEl) {
+  const flash = document.getElementById('page-flash');
+  flash.classList.remove('flash-active');
+  void flash.offsetWidth;
+  flash.classList.add('flash-active');
+  setTimeout(() => flash.classList.remove('flash-active'), 1300);
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (navEl) navEl.classList.add('active');
+  document.getElementById('topbar-title').textContent = pageNames[id] || id;
+  closeSidebar();
+  window.scrollTo(0, 0);
+}
 
-let pages=document.querySelectorAll('.page');
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('theme-btn').textContent = isDark ? '🌙' : '☀️';
+}
 
-pages.forEach(page=>{
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
 
-page.classList.remove('active');
+function filterArticles() {
+  const q = document.getElementById('article-search').value.toLowerCase().trim();
+  const cards = document.querySelectorAll('#articles-grid .article-card');
+  let visible = 0;
+  cards.forEach(card => {
+    const title = (card.getAttribute('data-title') || '').toLowerCase();
+    const paper = (card.getAttribute('data-paper') || '').toLowerCase();
+    const match = !q || title.includes(q) || paper.includes(q);
+    card.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+  document.getElementById('articles-count').textContent =
+    q ? `Showing ${visible} of 29 articles` : 'Showing 29 articles';
+}
 
+function drawDNA() {
+  const canvas = document.getElementById('dna-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  let t = 0;
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const col1 = isDark ? '0,220,255' : '0,110,184';
+    const col2 = isDark ? '0,255,157' : '0,135,90';
+    const w = canvas.width, h = canvas.height;
+    ctx.strokeStyle = `rgba(${col1},0.3)`;
+    ctx.lineWidth = 0.5;
+    for (let x = 0; x < w; x += 80) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
+    for (let y = 0; y < h; y += 80) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
+    const cx = w * 0.5, amp = Math.min(w * 0.18, 120), freq = 0.018;
+    for (let y = 0; y < h; y += 2) {
+      const phase = y * freq + t;
+      const x1 = cx + Math.sin(phase) * amp;
+      const x2 = cx + Math.sin(phase + Math.PI) * amp;
+      const alpha = 0.4 + 0.2 * Math.sin(phase * 2);
+      ctx.beginPath(); ctx.arc(x1,y,1.5,0,Math.PI*2); ctx.fillStyle=`rgba(${col1},${alpha})`; ctx.fill();
+      ctx.beginPath(); ctx.arc(x2,y,1.5,0,Math.PI*2); ctx.fillStyle=`rgba(${col2},${alpha})`; ctx.fill();
+      if (y % 30 < 2) {
+        ctx.beginPath(); ctx.moveTo(x1,y); ctx.lineTo(x2,y);
+        ctx.strokeStyle=`rgba(${col1},0.15)`; ctx.lineWidth=1; ctx.stroke();
+        ctx.beginPath(); ctx.arc(x1,y,3,0,Math.PI*2); ctx.fillStyle=`rgba(${col1},0.6)`; ctx.fill();
+        ctx.beginPath(); ctx.arc(x2,y,3,0,Math.PI*2); ctx.fillStyle=`rgba(${col2},0.6)`; ctx.fill();
+      }
+    }
+    t += 0.02;
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+function initDataStreams() {
+  const c = document.getElementById('data-streams');
+  if (!c) return;
+  for (let i = 0; i < 12; i++) {
+    const s = document.createElement('div');
+    s.style.cssText = `position:absolute;left:${Math.random()*100}%;top:-200px;width:1px;height:${60+Math.random()*100}px;background:linear-gradient(180deg,transparent,rgba(0,255,157,0.4),transparent);animation:streamFlow ${3+Math.random()*4}s ${Math.random()*5}s linear infinite;opacity:0.25;`;
+    c.appendChild(s);
+  }
+}
+
+function initInkLines() {
+  const c = document.getElementById('ink-lines-container');
+  if (!c) return;
+  for (let i = 0; i < 15; i++) {
+    const l = document.createElement('div');
+    l.style.cssText = `position:absolute;left:${Math.random()*20}%;top:${5+i*6}%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,107,53,0.25),transparent);animation:inkDraw ${4+Math.random()*4}s ${Math.random()*6}s linear infinite;width:0;`;
+    c.appendChild(l);
+  }
+}
+
+function initNetworkNodes() {
+  const c = document.getElementById('network-nodes-container');
+  if (!c) return;
+  for (let i = 0; i < 20; i++) {
+    const n = document.createElement('div');
+    n.style.cssText = `position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;width:5px;height:5px;border-radius:50%;background:rgba(147,51,234,0.5);box-shadow:0 0 8px rgba(147,51,234,0.4);animation:nodeBreath ${2+Math.random()*2}s ${Math.random()*2}s ease-in-out infinite alternate;`;
+    c.appendChild(n);
+  }
+}
+
+window.addEventListener('load', () => {
+  drawDNA();
+  initDataStreams();
+  initInkLines();
+  initNetworkNodes();
 });
-
-document.getElementById(pageId).classList.add('active');
-
-window.scrollTo({
-top:0,
-behavior:'smooth'
-});
-
-document.getElementById('sidebar').classList.remove('show');
-
-history.pushState(
-null,
-'',
-'#'+pageId
-);
-
-document.getElementById('pageName').innerText=
-pageTitles[pageId];
-
-}
-
-window.addEventListener('load',()=>{
-
-let hash=window.location.hash.replace('#','');
-
-if(hash){
-
-showPage(hash);
-
-}
-
-});
-
-function toggleTheme(){
-
-document.body.classList.toggle('light');
-
-}
-
-function toggleMenu(){
-
-document.getElementById('sidebar').classList.toggle('show');
-
-}
-
-window.addEventListener('scroll',()=>{
-
-let mini=document.getElementById('miniProfile');
-
-if(window.scrollY > 120){
-
-mini.classList.add('scrolled');
-
-}else{
-
-mini.classList.remove('scrolled');
-
-}
-
-});
-
-</script>
-
-
-<script>
-function filterArticles(){
- let input=document.getElementById('articleSearch');
- if(!input) return;
- let value=input.value.toLowerCase();
- document.querySelectorAll('.article-card').forEach(card=>{
-   let txt=card.innerText.toLowerCase();
-   card.style.display=txt.includes(value)?'block':'none';
- });
-}
 </script>
 
 </body>
